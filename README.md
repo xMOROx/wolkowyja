@@ -1,22 +1,40 @@
-# Ognisko w Wołkowyi 🔥
+# Wołkowyja Bonfire Event Platform 2026
 
-Dedykowana strona wydarzenia na ognisko w Wołkowyi nad Jeziorem Solińskim.
+A modern, responsive web application for managing private bonfire events. Built with vanilla JavaScript, Leaflet.js, Supabase real-time synchronization, and GitHub Pages deployment.
 
-## Funkcje
-- 🗺️ Interaktywna mapa (Leaflet.js) z lokalizacją Wołkowyi i odczytem GPS użytkownika z nawigacją w Google Maps
-- 👥 Formularz RSVP i dynamiczna lista gości
-- 🎒 Lista ekwipunku ("Kto co przynosi") z paskiem postępu
-- 🚗 Carpooling (wolne miejsca w autach)
-- ⏱️ Licznik odliczający do godziny rozpoczęcia
-- 🎵 Informacje, zasady i playlista Spotify
-- ⚡ Wirtualne wsparcie Supabase (synchronizacja w czasie rzeczywistym) oraz fallback do `localStorage`
+## Features
 
-## Instrukcja Konfiguracji i Publikacji
-Pełna instrukcja znajduje się w pliku [`INSTRUKCJA.md`](./INSTRUKCJA.md).
+- **Event Information & Real-Time Countdown**: Event schedules, arrival windows, and RSVP deadlines.
+- **Location & Google Maps Integration**: Interactive map pin with direct link to Google Maps navigation app.
+- **Arrival & Contact Guide**: Step-by-step navigation instructions for the final 10-minute arrival segment with host contact actions.
+- **RSVP & Alcohol Preference Management**: Attendance confirmation form capturing attendee count, alcohol choices, and contributed items.
+- **Equipment & Supply Checklist**: Real-time shared supply tracking with item assignment and progress tracking.
+- **Supabase Realtime Sync**: Dual-mode data persistence using Supabase PostgreSQL with automated `localStorage` fallback.
 
-## Komendy
+## Tech Stack
+
+- **Frontend**: HTML5, Vanilla CSS3 (Custom Design Tokens), JavaScript (ES Modules)
+- **Mapping**: Leaflet.js (CartoDB Dark Tiles)
+- **Icons**: Lucide Icons (SVG)
+- **Database / Backend**: Supabase JS Client (`@supabase/supabase-js`)
+- **Build Tool**: Vite
+
+## Getting Started
+
+### Installation
 ```bash
-npm run dev      # Uruchomienie lokalnego serwera deweloperskiego
-npm run build    # Budowanie wersji produkcyjnej
-npm run deploy   # Wdrożenie na GitHub Pages
+npm install
 ```
+
+### Local Development Server
+```bash
+npm run dev
+```
+
+### Production Build
+```bash
+npm run build
+```
+
+## Documentation
+For complete deployment and database schema configuration instructions, see [`DEPLOYMENT.md`](./DEPLOYMENT.md).

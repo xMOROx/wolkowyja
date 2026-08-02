@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ognisko w Wołkowyi 🔥 | Spotkanie Ekipy</title>
-  <meta name="description" content="Oficjalna strona wydarzenia: Ognisko dla znajomych w Wołkowyi nad Jeziorem Solińskim. Nawigacja, lista gości, ekwipunek i wspólny dojazd.">
+  <title>Bieszczadzkie Ognisko w Wołkowyi | 12 Września 2026</title>
+  <meta name="description" content="Oficjalna strona wydarzenia: Bieszczadzkie Ognisko w Wołkowyi. Nawigacja Google Maps, lista gości, preferencje alkoholu i instrukcja dojazdu na działkę.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,15 +22,17 @@
   <header class="hero">
     <div class="hero-overlay"></div>
     <div class="container hero-content">
-      <div class="badge glow-badge">
-        <i data-lucide="flame" class="icon-flame"></i> Bieszczadzki Klimat 2026
+      <div class="badge">
+        <i data-lucide="flame"></i> Wydarzenie Prywatne 2026
       </div>
-      <h1 class="hero-title">Ognisko w Wołkowyi <span class="text-gradient">🔥</span></h1>
-      <p class="hero-subtitle"> Spotkanie ekipy nad Jeziorem Solińskim. Kiełbaski, gitara, zimne napoje i wieczór przy gwiazdach!</p>
+      <h1 class="hero-title">Ognisko w Wołkowyi <span class="text-gradient">2026</span></h1>
+      <p class="hero-subtitle">Spotkanie ekipy nad Jeziorem Solińskim. Sobota, 12 Września 2026. Najwcześniejszy przyjazd od 18:00 – 19:00.</p>
 
       <!-- COUNTDOWN TIMER -->
-      <div class="countdown-card glass-panel" id="countdown-container">
-        <h3 class="countdown-label"><i data-lucide="timer"></i> Do ogniska zostało:</h3>
+      <div class="countdown-card glass-panel">
+        <div class="countdown-label">
+          <i data-lucide="timer"></i> Do wydarzenia zostało:
+        </div>
         <div class="countdown-grid">
           <div class="time-block">
             <span id="days">00</span>
@@ -52,8 +54,8 @@
       </div>
 
       <div class="hero-actions">
-        <a href="#map-section" class="btn btn-primary btn-glow">
-          <i data-lucide="navigation"></i> Wyznacz Trasę Dojazdu
+        <a href="#arrival-section" class="btn btn-primary">
+          <i data-lucide="navigation"></i> Instrukcja Dojazdu na Działkę
         </a>
         <a href="#rsvp-section" class="btn btn-secondary">
           <i data-lucide="user-check"></i> Potwierdź Obecność
@@ -68,91 +70,81 @@
       <div class="info-card glass-panel">
         <div class="info-icon"><i data-lucide="calendar"></i></div>
         <div>
-          <h4>Kiedy?</h4>
-          <p id="event-date">Sobota, 15 Sierpnia 2026</p>
-          <span class="subtext">Start o godzinie 17:00</span>
+          <h4>Termin Ogniska</h4>
+          <p>Sobota, 12 Września 2026</p>
+          <span class="subtext">Przyjazd najwcześniej 18:00 - 19:00</span>
         </div>
       </div>
+
+      <div class="info-card glass-panel">
+        <div class="info-icon"><i data-lucide="clock"></i></div>
+        <div>
+          <h4>Termin Zgłoszeń (RSVP)</h4>
+          <p>Niedziela, 6 Września 2026</p>
+          <span class="subtext">Prosimy o potwierdzenie do godz. 23:59</span>
+        </div>
+      </div>
+
       <div class="info-card glass-panel">
         <div class="info-icon"><i data-lucide="map-pin"></i></div>
         <div>
-          <h4>Gdzie?</h4>
+          <h4>Lokalizacja</h4>
           <p>Wołkowyja</p>
-          <span class="subtext">Nad Jeziorem Solińskim, Bieszczady</span>
-        </div>
-      </div>
-      <div class="info-card glass-panel">
-        <div class="info-icon"><i data-lucide="cloud-sun"></i></div>
-        <div>
-          <h4>Pogoda (Wołkowyja)</h4>
-          <p id="weather-text">23°C • Słonecznie / Czyste niebo</p>
-          <span class="subtext">Idealne warunki na wieczorne ognisko!</span>
+          <span class="subtext">Gmina Solina, Bieszczady</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MAP & ROUTE FINDER -->
+  <!-- ARRIVAL & DIRECTIONS MODULE (10 MINS AWAY) -->
+  <section class="section arrival-section" id="arrival-section">
+    <div class="container">
+      <div class="glass-panel arrival-card">
+        <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+          <div class="badge"><i data-lucide="compass"></i> Dojazd na Działkę</div>
+          <h2 style="margin-top: 8px;">Jesteś 10 Minut przed Przyjazdem?</h2>
+          <p>Przeczytaj poniższą instrukcję lub skontaktuj się z nami bezpośrednio przed skrętem na zjazd.</p>
+        </div>
+
+        <div class="arrival-instructions">
+          <strong>Wskazówki Dojazdowe:</strong><br>
+          Jadąc drogą wojewódzką z Polańczyka wjeżdżasz do centrum Wołkowyi. Za kapliczką po lewej stronie skręć w utwardzoną drogę szutrową prowadzącą w stronę jeziora. Po około 150 metrach szukaj czarnej bramki po prawej stronie. Gdy znajdziesz się 10 minut przed celem – zadzwoń do nas, abyśmy wyjechali lub otworzyli bramę!
+        </div>
+
+        <div class="arrival-actions">
+          <a href="tel:600000000" class="btn btn-primary">
+            <i data-lucide="phone-call"></i> Zadzwoń do Organizatora
+          </a>
+          <a href="https://www.google.com/maps/search/49.341933,+22.433710" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <i data-lucide="external-link"></i> Nawigacja Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP SECTION -->
   <section class="section map-section" id="map-section">
     <div class="container">
       <div class="section-header">
-        <div class="badge"><i data-lucide="map"></i> Lokalizacja & Dojazd</div>
-        <h2>Mapa z Punctem & Wyznaczanie Trasy</h2>
-        <p>Kliknij przycisk poniżej, aby automatycznie odczytać Twoją lokalizację GPS i wyznaczyć najlepszy dojazd do Wołkowyi.</p>
+        <div class="badge"><i data-lucide="map"></i> Lokalizacja GPS</div>
+        <h2>Punkt Docelowy na Mapie</h2>
+        <p>Lokalizacja w Wołkowyi (49.341933, 22.433710). Kliknij poniższy przycisk, aby uruchomić nawigację w aplikacji Google Maps.</p>
       </div>
 
       <div class="map-layout">
-        <!-- Control Box -->
         <div class="map-controls glass-panel">
           <div class="location-box">
-            <div class="loc-item">
-              <span class="dot origin-dot"></span>
-              <div>
-                <small>Twoja lokalizacja:</small>
-                <strong id="user-location-text">Nie określono (Kliknij przycisk poniżej)</strong>
-              </div>
-            </div>
-            <div class="loc-divider"></div>
-            <div class="loc-item">
-              <span class="dot dest-dot"></span>
-              <div>
-                <small>Cel (Miejsce Ogniska):</small>
-                <strong>Wołkowyja (49.341933, 22.433710)</strong>
-              </div>
-            </div>
+            <small style="color: var(--color-text-muted); display: block; margin-bottom: 4px;">Punkt Ogniska:</small>
+            <strong style="color: #FFF; font-size: 1rem;">Wołkowyja (Działka)</strong>
+            <span class="subtext">Współrzędne: 49.341933, 22.433710</span>
           </div>
 
-          <div id="route-info" class="route-info-box hidden">
-            <div class="route-metric">
-              <i data-lucide="milestone"></i>
-              <div>
-                <span>Odległość</span>
-                <strong id="route-distance">-- km</strong>
-              </div>
-            </div>
-            <div class="route-metric">
-              <i data-lucide="clock"></i>
-              <div>
-                <span>Szacowany czas</span>
-                <strong id="route-duration">-- min</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="map-button-group">
-            <button id="btn-get-location" class="btn btn-primary btn-full btn-glow">
-              <i data-lucide="crosshair"></i> Wyznacz Trasę z Mojej Lokalizacji
-            </button>
-            
-            <a id="btn-google-maps-nav" href="https://www.google.com/maps/search/49.341933,+22.433710" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-full">
-              <i data-lucide="external-link"></i> Otwórz w Google Maps App
-            </a>
-          </div>
-
-          <div id="location-error" class="error-msg hidden"></div>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=49.341933,22.433710" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">
+            <i data-lucide="navigation"></i> Uruchom Nawigację Google Maps
+          </a>
         </div>
 
-        <!-- Leaflet Map Container -->
         <div class="map-wrapper glass-panel">
           <div id="map"></div>
         </div>
@@ -160,101 +152,97 @@
     </div>
   </section>
 
-  <!-- RSVP & GUEST LIST -->
+  <!-- RSVP FORM & GUEST LIST -->
   <section class="section rsvp-section" id="rsvp-section">
     <div class="container">
       <div class="section-header">
-        <div class="badge"><i data-lucide="users"></i> Lista Gości & Potwierdzenia</div>
-        <h2>Kto Weźmie Udział?</h2>
-        <p>Potwierdź swoją obecność, abyśmy wiedzieli ile kiełbasek i napojów przygotować!</p>
+        <div class="badge"><i data-lucide="users"></i> Potwierdzenie Obecności</div>
+        <h2>Formularz Zgłoszeniowy (RSVP)</h2>
+        <p>Prosimy o przesłanie zgłoszenia najpóźniej do niedzieli, 6 Września 2026 (godz. 23:59).</p>
       </div>
 
-      <div class="grid-2 rsvp-grid">
-        <!-- Formularz Dodawania -->
-        <div class="glass-panel rsvp-form-card">
-          <h3><i data-lucide="user-plus"></i> Potwierdź Swoją Obecność</h3>
+      <div class="grid-2">
+        <!-- RSVP Form -->
+        <div class="glass-panel">
+          <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="user-plus"></i> Wypełnij Zgłoszenie
+          </h3>
+
           <form id="rsvp-form">
             <div class="form-group">
-              <label for="guest-name">Twoje Imię / Pseudonim *</label>
-              <input type="text" id="guest-name" placeholder="np. Bartek" required class="form-input">
+              <label for="guest-name">Imię i Nazwisko / Pseudonim *</label>
+              <input type="text" id="guest-name" placeholder="np. Bartek Kowalski" required class="form-input">
             </div>
 
             <div class="form-group">
-              <label for="guest-status">Czy będziesz? *</label>
+              <label for="guest-status">Czy będziesz na ognisku? *</label>
               <select id="guest-status" required class="form-input">
-                <option value="yes">🔥 Będę na 100%</option>
-                <option value="maybe">🤔 Może / Jeszcze nie wiem</option>
-                <option value="no">❌ Niestety nie dam rady</option>
+                <option value="yes">Potwierdzam obecność (Będę)</option>
+                <option value="maybe">Niezdecydowany / Może</option>
+                <option value="no">Brak możliwości przybycia</option>
               </select>
             </div>
 
-            <div class="form-group grid-2-sm">
-              <div>
-                <label for="guest-plus">Osoby towarzyszące (+X)</label>
-                <input type="number" id="guest-plus" min="0" max="10" value="0" class="form-input">
-              </div>
-              <div>
-                <label for="guest-transport">Dojazd</label>
-                <select id="guest-transport" class="form-input">
-                  <option value="car_driver">🚗 Jadę autem (mam miejsca)</option>
-                  <option value="car_passenger">🚘 Jadę z kimś w aucie</option>
-                  <option value="needs_ride">🙋 Szukam transportu</option>
-                  <option value="other">🚲 Inne / Na miejscu</option>
-                </select>
-              </div>
+            <div class="form-group">
+              <label for="guest-plus">Liczba osób towarzyszących (+X)</label>
+              <input type="number" id="guest-plus" min="0" max="8" value="0" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label for="guest-drinking">Czy planujesz pić alkohol? *</label>
+              <select id="guest-drinking" required class="form-input">
+                <option value="yes">Tak, planuję pić alkohol</option>
+                <option value="no">Nie, nie piję / jestem kierowcą</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="alcohol-group">
+              <label for="guest-alcohol">Jaki gatunek alkoholu preferujesz lub przynosisz?</label>
+              <input type="text" id="guest-alcohol" placeholder="np. Piwo, Wódka, Wino, Whisky" class="form-input">
             </div>
 
             <div class="form-group">
               <label for="guest-bringing">Co przynosisz ze sobą?</label>
-              <input type="text" id="guest-bringing" placeholder="np. Kiełbaski, głośnik, dodatkowe drewno..." class="form-input">
+              <input type="text" id="guest-bringing" placeholder="np. Kiełbaski, chleb, przekąski" class="form-input">
             </div>
 
-            <button type="submit" class="btn btn-primary btn-full btn-glow">
-              <i data-lucide="check-circle"></i> Zapisz Moje Potwierdzenie
+            <button type="submit" class="btn btn-primary btn-full">
+              <i data-lucide="check-circle"></i> Zapisz Zgłoszenie
             </button>
           </form>
         </div>
 
-        <!-- Lista Gości -->
-        <div class="glass-panel guest-list-card">
+        <!-- Guest List -->
+        <div class="glass-panel">
           <div class="guest-list-header">
-            <h3><i data-lucide="list-checks"></i> Zgłoszeni Goście (<span id="confirmed-count">0</span>)</h3>
+            <h3>Lista Gości (<span id="confirmed-count">0</span> os.)</h3>
             <div class="guest-stats">
-              <span class="stat-tag tag-yes"><i data-lucide="check"></i> <span id="stat-yes">0</span> Będą</span>
-              <span class="stat-tag tag-maybe"><i data-lucide="help-circle"></i> <span id="stat-maybe">0</span> Może</span>
+              <span class="stat-tag tag-yes"><span id="stat-yes">0</span> Potwierdzonych</span>
+              <span class="stat-tag tag-maybe"><span id="stat-maybe">0</span> Niezdecydowanych</span>
             </div>
           </div>
 
-          <div class="guest-filter">
-            <button class="filter-btn active" data-filter="all">Wszyscy</button>
-            <button class="filter-btn" data-filter="yes">Będą na 100%</button>
-            <button class="filter-btn" data-filter="maybe">Niezdecydowani</button>
-          </div>
-
-          <div id="guest-list-container" class="guest-list-scroll">
-            <!-- Renderowane dynamicznie w JS -->
+          <div class="guest-list-scroll" id="guest-list-container">
+            <!-- Dynamic list -->
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EQUIPMENT CHECKLIST & CARPOOLING -->
-  <section class="section info-tools-section">
-    <div class="container grid-2">
-      
-      <!-- Lista Ekwipunku / Kto Co Przynosi -->
-      <div class="glass-panel tool-card">
-        <div class="card-header-flex">
-          <div>
-            <h3><i data-lucide="shopping-bag"></i> Lista Ekwipunku na Ognisko</h3>
-            <p class="subtext">Kto co zabiera? Zadeklaruj produkty, żeby niczego nie brakowało!</p>
-          </div>
+  <!-- EQUIPMENT CHECKLIST -->
+  <section class="section checklist-section">
+    <div class="container">
+      <div class="glass-panel">
+        <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+          <div class="badge"><i data-lucide="shopping-bag"></i> Wspólny Ekwipunek</div>
+          <h2 style="margin-top: 8px;">Lista Rzeczy do Przyniesienia</h2>
+          <p>Zadeklaruj produkty, które przyniesiesz na ognisko, aby uniknąć dublowania zapasów.</p>
         </div>
 
         <div class="progress-bar-container">
           <div class="progress-label">
-            <span>Postęp przygotowań</span>
+            <span>Postęp skompletowania ekwipunku</span>
             <strong id="checklist-progress-text">0%</strong>
           </div>
           <div class="progress-track">
@@ -263,116 +251,27 @@
         </div>
 
         <div id="checklist-container" class="checklist-items">
-          <!-- Renderowane w JS -->
+          <!-- Dynamic checklist -->
         </div>
 
         <div class="add-item-box">
-          <input type="text" id="new-item-input" placeholder="Dodaj nową pozycję na listę..." class="form-input-sm">
-          <button id="btn-add-item" class="btn btn-secondary btn-sm"><i data-lucide="plus"></i> Dodaj</button>
+          <input type="text" id="new-item-input" placeholder="Dodaj nową pozycję na listę..." class="form-input" style="flex:1;">
+          <button id="btn-add-item" class="btn btn-secondary"><i data-lucide="plus"></i> Dodaj</button>
         </div>
       </div>
-
-      <!-- Carpooling / Przejazdy -->
-      <div class="glass-panel tool-card">
-        <div class="card-header-flex">
-          <div>
-            <h3><i data-lucide="car"></i> Wspólny Dojazd / Carpooling</h3>
-            <p class="subtext">Masz wolne miejsce w aucie lub szukasz transportu? Zgłoś się!</p>
-          </div>
-        </div>
-
-        <div id="carpool-list-container" class="carpool-items">
-          <!-- Renderowane w JS -->
-        </div>
-
-        <button id="btn-open-carpool-modal" class="btn btn-secondary btn-full margin-top-auto">
-          <i data-lucide="plus-circle"></i> Zgłoś Auto / Dodaj Wolne Miejsca
-        </button>
-      </div>
-
     </div>
   </section>
-
-  <!-- DETAILS, RULES & SPOTIFY -->
-  <section class="section rules-section">
-    <div class="container grid-3">
-      
-      <div class="glass-panel feature-box">
-        <div class="feature-icon"><i data-lucide="clipboard-list"></i></div>
-        <h3>Co Warto Zabrać?</h3>
-        <ul class="feature-list">
-          <li><i data-lucide="check-square"></i> Ciepła bluza / kurtka na wieczór</li>
-          <li><i data-lucide="check-square"></i> Koc lub krzesełko turystyczne</li>
-          <li><i data-lucide="check-square"></i> Spray na komary i kleszcze</li>
-          <li><i data-lucide="check-square"></i> Latarka / czołówka</li>
-          <li><i data-lucide="check-square"></i> Dobre nastawienie i uśmiech!</li>
-        </ul>
-      </div>
-
-      <div class="glass-panel feature-box">
-        <div class="feature-icon"><i data-lucide="shield-alert"></i></div>
-        <h3>Zasady na Miejscu</h3>
-        <ul class="feature-list">
-          <li><i data-lucide="alert-circle"></i> Dbamy o czystość – śmieci zabieramy ze sobą</li>
-          <li><i data-lucide="alert-circle"></i> Bezpieczeństwo przy ogniu to podstawa</li>
-          <li><i data-lucide="alert-circle"></i> Kierowcy – absolutne 0% alkoholu!</li>
-          <li><i data-lucide="alert-circle"></i> Pomagamy przy zbieraniu drewna i sprzątaniu</li>
-        </ul>
-      </div>
-
-      <div class="glass-panel feature-box">
-        <div class="feature-icon"><i data-lucide="music"></i></div>
-        <h3>Muzyka i Playlista</h3>
-        <p class="subtext">Masz ulubione piosenki na ognisko? Dodaj je do naszej wspólnej playlisty Spotify lub przynieś gitarę!</p>
-        <div class="music-actions margin-top-auto">
-          <a href="https://spotify.com" target="_blank" class="btn btn-spotify btn-full">
-            <i data-lucide="disc"></i> Otwórz Playlistę Spotify
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CARPOOL MODAL -->
-  <div id="carpool-modal" class="modal-overlay hidden">
-    <div class="modal-card glass-panel">
-      <button id="btn-close-carpool-modal" class="modal-close"><i data-lucide="x"></i></button>
-      <h3><i data-lucide="car"></i> Zgłoś Auto / Przejazd</h3>
-      <form id="carpool-form">
-        <div class="form-group">
-          <label for="carpool-driver">Kierowca (Imię)</label>
-          <input type="text" id="carpool-driver" placeholder="np. Patryk" required class="form-input">
-        </div>
-        <div class="form-group">
-          <label for="carpool-from">Skąd wyjeżdżasz?</label>
-          <input type="text" id="carpool-from" placeholder="np. Rzeszów / Sanok" required class="form-input">
-        </div>
-        <div class="form-group">
-          <label for="carpool-seats">Liczba wolnych miejsc</label>
-          <input type="number" id="carpool-seats" min="1" max="8" value="3" required class="form-input">
-        </div>
-        <div class="form-group">
-          <label for="carpool-time">Wyjazd (Godzina)</label>
-          <input type="text" id="carpool-time" placeholder="np. 16:00 z rynku" class="form-input">
-        </div>
-        <button type="submit" class="btn btn-primary btn-full btn-glow">
-          <i data-lucide="plus"></i> Opublikuj Przejazd
-        </button>
-      </form>
-    </div>
-  </div>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <p>🔥 Ognisko w Wołkowyi 2026 • Widzimy się na miejscu! <i data-lucide="heart" class="icon-heart"></i></p>
+      <p>Bieszczadzkie Ognisko w Wołkowyi &bull; 12 Września 2026</p>
     </div>
   </footer>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <!-- Main Script -->
+  <!-- Main Entrypoint -->
   <script type="module" src="./src/main.js"></script>
 
 </body>

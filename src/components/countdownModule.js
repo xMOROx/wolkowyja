@@ -8,7 +8,7 @@ export function initCountdown() {
 
   if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
 
-  const target = new Date(EVENT_DETAILS.targetDate).getTime();
+  const target = new Date(EVENT_DETAILS.eventTargetDate).getTime();
 
   function updateTimer() {
     const now = new Date().getTime();
@@ -20,7 +20,7 @@ export function initCountdown() {
       minsEl.textContent = '00';
       secsEl.textContent = '00';
       const label = document.querySelector('.countdown-label');
-      if (label) label.innerHTML = `🔥 OGNISKO WŁAŚNIE TRWA! BAWCIE SIĘ DOBRZE! 🔥`;
+      if (label) label.textContent = 'OGNISKO WŁAŚNIE TRWA!';
       return;
     }
 
