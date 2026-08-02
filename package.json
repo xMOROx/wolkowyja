@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "vite build && gh-pages -d dist",
-    "dump": "node scripts/dump.js"
+    "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
