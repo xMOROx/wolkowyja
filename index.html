@@ -3,13 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bieszczadzkie Ognisko w Wołkowyi | 12 Września 2026</title>
-  <meta name="description" content="Oficjalna strona wydarzenia: Bieszczadzkie Ognisko w Wołkowyi. Nawigacja Google Maps, lista gości, preferencje alkoholu i instrukcja dojazdu na działkę.">
+  <title>Bieszczadzkie Ognisko w Wołkowyi 2026</title>
+  <meta name="description" content="Dołącz do nas nad Jeziorem Solińskim — 12 września 2026. Potwierdź obecność, sprawdź preferencje i przeczytaj instrukcję dojazdu.">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+
+  <meta property="og:title" content="Bieszczadzkie Ognisko w Wołkowyi 2026">
+  <meta property="og:description" content="Dołącz do nas nad Jeziorem Solińskim — 12 września 2026. Potwierdź obecność i sprawdź dojazd.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#080C14">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -21,12 +27,24 @@
   <!-- HERO BANNER -->
   <header class="hero">
     <div class="hero-overlay"></div>
+    
+    <!-- Topographic Contours SVG Background -->
+    <svg class="hero-contours" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" preserveAspectRatio="none">
+      <path d="M-100,200 Q200,100 500,250 T1100,150" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+      <path d="M-100,300 Q300,180 600,350 T1100,280" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+      <path d="M-100,420 Q250,320 700,450 T1100,380" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+      <path d="M-100,500 Q400,400 800,520 T1100,480" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+    </svg>
+
+    <!-- Canvas Spark Embers -->
+    <canvas id="ember-canvas" class="ember-canvas"></canvas>
+
     <div class="container hero-content">
       <div class="badge">
-        <i data-lucide="flame"></i> Wydarzenie Prywatne 2026
+        <i data-lucide="flame"></i> Wydarzenie Prywatne
       </div>
-      <h1 class="hero-title">Ognisko w Wołkowyi <span class="text-gradient">2026</span></h1>
-      <p class="hero-subtitle">Spotkanie ekipy nad Jeziorem Solińskim. Sobota, 12 Września 2026. Najwcześniejszy przyjazd od 18:00 – 19:00.</p>
+      <h1 class="hero-title" id="hero-title">Ognisko w Wołkowyi <span id="hero-title-year" class="text-gradient">2026</span></h1>
+      <p class="hero-subtitle" id="hero-subtitle">Spotkanie ekipy nad Jeziorem Solińskim. Sobota, 12 Września 2026.</p>
 
       <!-- COUNTDOWN TIMER -->
       <div class="countdown-card glass-panel">
@@ -65,14 +83,14 @@
   </header>
 
   <!-- QUICK INFO CARDS -->
-  <section class="section quick-info">
+  <section class="section quick-info reveal">
     <div class="container grid-3">
       <div class="info-card glass-panel">
         <div class="info-icon"><i data-lucide="calendar"></i></div>
         <div>
           <h4>Termin Ogniska</h4>
-          <p>Sobota, 12 Września 2026</p>
-          <span class="subtext">Przyjazd najwcześniej 18:00 - 19:00</span>
+          <p id="info-date">Sobota, 12 Września 2026</p>
+          <span class="subtext" id="info-date-sub">Najwcześniejszy przyjazd: 18:00 - 19:00</span>
         </div>
       </div>
 
@@ -80,8 +98,8 @@
         <div class="info-icon"><i data-lucide="clock"></i></div>
         <div>
           <h4>Termin Zgłoszeń (RSVP)</h4>
-          <p>Niedziela, 6 Września 2026</p>
-          <span class="subtext">Prosimy o potwierdzenie do godz. 23:59</span>
+          <p id="info-rsvp-deadline">Niedziela, 6 Września 2026</p>
+          <span class="subtext" id="info-rsvp-deadline-sub">Potwierdzenia do godz. 23:59</span>
         </div>
       </div>
 
@@ -89,33 +107,30 @@
         <div class="info-icon"><i data-lucide="map-pin"></i></div>
         <div>
           <h4>Lokalizacja</h4>
-          <p>Wołkowyja</p>
-          <span class="subtext">Gmina Solina, Bieszczady</span>
+          <p id="info-location">Wołkowyja</p>
+
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ARRIVAL & DIRECTIONS MODULE (10 MINS AWAY) -->
-  <section class="section arrival-section" id="arrival-section">
+  <!-- ARRIVAL & DIRECTIONS MODULE -->
+  <section class="section arrival-section reveal" id="arrival-section">
     <div class="container">
       <div class="glass-panel arrival-card">
         <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
           <div class="badge"><i data-lucide="compass"></i> Dojazd na Działkę</div>
           <h2 style="margin-top: 8px;">Jesteś 10 Minut przed Przyjazdem?</h2>
-          <p>Przeczytaj poniższą instrukcję lub skontaktuj się z nami bezpośrednio przed skrętem na zjazd.</p>
+          <p>Zapoznaj się z sekwencją kroków dojazdowych lub skontaktuj się z nami bezpośrednio przed skrętem.</p>
         </div>
 
-        <div class="arrival-instructions">
-          <strong>Wskazówki Dojazdowe:</strong><br>
-          Jadąc drogą wojewódzką z Polańczyka wjeżdżasz do centrum Wołkowyi. Za kapliczką po lewej stronie skręć w utwardzoną drogę szutrową prowadzącą w stronę jeziora. Po około 150 metrach szukaj czarnej bramki po prawej stronie. Gdy znajdziesz się 10 minut przed celem – zadzwoń do nas, abyśmy wyjechali lub otworzyli bramę!
-        </div>
+        <ol id="arrival-steps-list" class="arrival-steps"></ol>
 
         <div class="arrival-actions">
-          <a href="tel:600000000" class="btn btn-primary">
+          <a id="link-call-organizer" href="tel:600000000" class="btn btn-primary">
             <i data-lucide="phone-call"></i> Zadzwoń do Organizatora
           </a>
-          <a href="https://www.google.com/maps/search/49.341933,+22.433710" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <a id="link-maps-search" href="https://www.google.com/maps/search/49.341933,+22.433710" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
             <i data-lucide="external-link"></i> Nawigacja Google Maps
           </a>
         </div>
@@ -124,23 +139,23 @@
   </section>
 
   <!-- MAP SECTION -->
-  <section class="section map-section" id="map-section">
+  <section class="section map-section reveal" id="map-section">
     <div class="container">
       <div class="section-header">
         <div class="badge"><i data-lucide="map"></i> Lokalizacja GPS</div>
         <h2>Punkt Docelowy na Mapie</h2>
-        <p>Lokalizacja w Wołkowyi (49.341933, 22.433710). Kliknij poniższy przycisk, aby uruchomić nawigację w aplikacji Google Maps.</p>
+        <p>Lokalizacja w Wołkowyi. Kliknij poniższy przycisk, aby uruchomić nawigację w aplikacji Google Maps.</p>
       </div>
 
       <div class="map-layout">
         <div class="map-controls glass-panel">
           <div class="location-box">
             <small style="color: var(--color-text-muted); display: block; margin-bottom: 4px;">Punkt Ogniska:</small>
-            <strong style="color: #FFF; font-size: 1rem;">Wołkowyja (Działka)</strong>
-            <span class="subtext">Współrzędne: 49.341933, 22.433710</span>
+            <strong id="map-location-name" style="color: #FFF; font-size: 1rem; display: block; margin-bottom: 2px;">Wołkowyja (Działka)</strong>
+            <span id="map-coords" class="subtext" style="font-family: var(--font-mono);">49.341933, 22.433710</span>
           </div>
 
-          <a href="https://www.google.com/maps/dir/?api=1&destination=49.341933,22.433710" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">
+          <a id="link-maps-directions" href="https://www.google.com/maps/dir/?api=1&destination=49.341933,22.433710" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">
             <i data-lucide="navigation"></i> Uruchom Nawigację Google Maps
           </a>
         </div>
@@ -153,12 +168,12 @@
   </section>
 
   <!-- RSVP FORM & GUEST LIST -->
-  <section class="section rsvp-section" id="rsvp-section">
+  <section class="section rsvp-section reveal" id="rsvp-section">
     <div class="container">
       <div class="section-header">
         <div class="badge"><i data-lucide="users"></i> Potwierdzenie Obecności</div>
         <h2>Formularz Zgłoszeniowy (RSVP)</h2>
-        <p>Prosimy o przesłanie zgłoszenia najpóźniej do niedzieli, 6 Września 2026 (godz. 23:59).</p>
+        <p>Prosimy o przesłanie zgłoszenia najpóźniej do wyznaczonego terminu.</p>
       </div>
 
       <div class="grid-2">
@@ -222,6 +237,15 @@
             </div>
           </div>
 
+          <div class="guest-filters">
+            <button class="filter-btn active" data-filter="all">Wszyscy</button>
+            <button class="filter-btn" data-filter="yes">Na pewno będą</button>
+            <button class="filter-btn" data-filter="maybe">Niezdecydowani</button>
+          </div>
+
+          <!-- Stats Bar Container (REQ-14) -->
+          <div id="guest-stats-bar-container" style="margin-bottom: 16px;"></div>
+
           <div class="guest-list-scroll" id="guest-list-container">
             <!-- Dynamic list -->
           </div>
@@ -231,7 +255,7 @@
   </section>
 
   <!-- EQUIPMENT CHECKLIST -->
-  <section class="section checklist-section">
+  <section class="section checklist-section reveal">
     <div class="container">
       <div class="glass-panel">
         <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
@@ -265,7 +289,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <p>Bieszczadzkie Ognisko w Wołkowyi &bull; 12 Września 2026</p>
+      <p>Bieszczadzkie Ognisko w Wołkowyi &bull; 2026</p>
     </div>
   </footer>
 

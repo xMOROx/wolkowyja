@@ -1,0 +1,48 @@
+.arrival-card {
+  border-left: 4px solid var(--color-ember);
+}
+
+.arrival-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  position: relative;
+}
+
+.arrival-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  position: relative;
+}
+
+.arrival-step-index {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-instrument);
+  border: 1px solid var(--color-ember);
+  color: var(--color-ember);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.arrival-step-text {
+  font-size: 0.9375rem;
+  color: var(--color-text-main);
+  line-height: 1.5;
+  padding-top: 2px;
+}
+
+.arrival-actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}

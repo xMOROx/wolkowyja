@@ -1,4 +1,8 @@
-export const EVENT_DETAILS = {
+// Dane ZAPASOWE — używane wyłącznie gdy Supabase nie jest skonfigurowany
+// albo zapytanie się nie powiedzie. Docelowym źródłem prawdy jest
+// tabela `event_config` w Supabase (patrz eventConfigService.js).
+
+export const EVENT_DETAILS_FALLBACK = {
   title: "Bieszczadzkie Ognisko w Wołkowyi",
   locationName: "Wołkowyja, nad Jeziorem Solińskim",
   coords: {
@@ -7,13 +11,22 @@ export const EVENT_DETAILS = {
   },
   dateString: "Sobota, 12 Września 2026",
   timeString: "Najwcześniejszy przyjazd: 18:00 - 19:00",
-  rsvpDeadlineString: "Potwierdzenia do: 6 Września 2026 (godz. 23:59)",
-  eventTargetDate: "2026-09-12T18:00:00",
-  rsvpDeadlineDate: "2026-09-06T23:59:59",
+  rsvpDeadlineString: "Potwierdzenia do: Niedziela, 6 Września 2026 (godz. 23:59)",
+  eventTargetDate: "2026-09-12T18:00:00+02:00",
+  rsvpDeadlineDate: "2026-09-06T23:59:59+02:00",
   hostPhone: "+48 600 000 000",
   hostPhoneRaw: "600000000",
-  arrivalInstructions: "Jadąc główną drogą z Polańczyka wjeżdżasz do Wołkowyi. Za kapliczką po lewej stronie skręć w utwardzoną drogę szutrową prowadzącą w stronę jeziora. Po około 150 metrach szukaj czarnej bramki po prawej stronie. Gdy będziesz 10 minut przed celem – zadzwoń lub napisz, wyjdziemy na drogę!"
+  arrivalInstructions: "Jadąc główną drogą z Polańczyka wjeżdżasz do Wołkowyi. Za kapliczką po lewej stronie skręć w utwardzoną drogę szutrową prowadzącą w stronę jeziora. Po około 150 metrach szukaj czarnej bramki po prawej stronie. Gdy będziesz 10 minut przed celem – zadzwoń lub napisz, wyjdziemy na drogę!",
+  arrivalSteps: [
+    "Wjedź do Wołkowyi od strony Polańczyka główną drogą",
+    "Za przydrożną kapliczką skręć w lewo, w utwardzoną drogę szutrową w kierunku jeziora",
+    "Jedź ok. 150 metrów — szukaj czarnej bramki po prawej stronie",
+    "Gdy jesteś 10 minut przed celem — zadzwoń lub napisz, wyjdziemy na drogę"
+  ]
 };
+
+// Eksportujemy też stary alias EVENT_DETAILS dla pełnej wstecznej kompatybilności fallbacku
+export const EVENT_DETAILS = EVENT_DETAILS_FALLBACK;
 
 export const ALCOHOL_OPTIONS = [
   { value: "beer", label: "Piwo" },

@@ -1,5 +1,8 @@
-import { EVENT_DETAILS, INITIAL_GUESTS, INITIAL_CHECKLIST } from '../data/initialData.js';
-import { supabase, isSupabaseConfigured } from '../services/supabase.js';
+import { EVENT_DETAILS_FALLBACK, INITIAL_GUESTS, INITIAL_CHECKLIST } from '../data/fallbackData.js';
+import { supabase, isSupabaseConfigured } from '../services/supabaseClient.js';
+import { fetchEventConfig } from '../services/eventConfigService.js';
+import { fetchGuestsRemote, upsertGuestRemote } from '../services/guestsService.js';
+import { fetchChecklistRemote, insertChecklistItemRemote, updateChecklistItemRemote } from '../services/checklistService.js';
 
 const STORAGE_KEYS = {
   GUESTS: 'wolkowyja_v2_guests',
@@ -8,7 +11,7 @@ const STORAGE_KEYS = {
 
 class EventStore {
   constructor() {
-    this.eventDetails = EVENT_DETAILS;
+    this.eventDetails = null;
     this.guests = [];
     this.checklist = [];
     this.listeners = [];
@@ -26,46 +29,42 @@ class EventStore {
   }
 
   async init() {
+    await this.loadEventConfig();
     await this.loadGuests();
     await this.loadChecklist();
 
     if (isSupabaseConfigured()) {
       supabase
-        .channel('public:guests_v2')
+        .channel('public:event_config_v1')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'event_config' }, () => this.loadEventConfig())
+        .subscribe();
+
+      supabase
+        .channel('public:guests_v1')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'guests' }, () => this.loadGuests())
         .subscribe();
 
       supabase
-        .channel('public:checklist_v2')
+        .channel('public:checklist_v1')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'checklist' }, () => this.loadChecklist())
         .subscribe();
     }
   }
 
+  async loadEventConfig() {
+    const remoteConfig = await fetchEventConfig();
+    this.eventDetails = remoteConfig || EVENT_DETAILS_FALLBACK;
+    this.notify();
+  }
+
   async loadGuests() {
-    if (isSupabaseConfigured()) {
-      try {
-        const { data, error } = await supabase.from('guests').select('*').order('created_at', { ascending: false });
-        if (!error && data) {
-          this.guests = data.map(g => ({
-            id: g.id,
-            name: g.name,
-            status: g.status,
-            plusCount: g.plus_count || 0,
-            isDrinking: g.is_drinking ?? true,
-            alcoholType: g.alcohol_type || 'Nieokreślono',
-            bringing: g.bringing || 'Dobre chęci',
-            createdAt: g.created_at
-          }));
-          this.notify();
-          return;
-        }
-      } catch (e) {
-        console.error("Supabase load error:", e);
-      }
+    const remoteGuests = await fetchGuestsRemote();
+    if (remoteGuests) {
+      this.guests = remoteGuests;
+      this.notify();
+      return;
     }
 
-    // LocalStorage Fallback
     const saved = localStorage.getItem(STORAGE_KEYS.GUESTS);
     if (!saved) {
       this.guests = INITIAL_GUESTS;
@@ -87,20 +86,7 @@ class EventStore {
       createdAt: Date.now()
     };
 
-    if (isSupabaseConfigured()) {
-      try {
-        await supabase.from('guests').insert([{
-          name: newGuest.name,
-          status: newGuest.status,
-          plus_count: newGuest.plusCount,
-          is_drinking: newGuest.isDrinking,
-          alcohol_type: newGuest.alcoholType,
-          bringing: newGuest.bringing
-        }]);
-      } catch (err) {
-        console.error("Supabase insert error:", err);
-      }
-    }
+    await upsertGuestRemote(newGuest);
 
     const existingIdx = this.guests.findIndex(g => g.name.toLowerCase() === newGuest.name.toLowerCase());
     if (existingIdx !== -1) {
@@ -114,22 +100,11 @@ class EventStore {
   }
 
   async loadChecklist() {
-    if (isSupabaseConfigured()) {
-      try {
-        const { data, error } = await supabase.from('checklist').select('*').order('created_at', { ascending: true });
-        if (!error && data && data.length > 0) {
-          this.checklist = data.map(item => ({
-            id: item.id,
-            item: item.item_name,
-            claimedBy: item.claimed_by,
-            completed: item.completed
-          }));
-          this.notify();
-          return;
-        }
-      } catch (e) {
-        console.error("Supabase checklist error:", e);
-      }
+    const remoteChecklist = await fetchChecklistRemote();
+    if (remoteChecklist && remoteChecklist.length > 0) {
+      this.checklist = remoteChecklist;
+      this.notify();
+      return;
     }
 
     const saved = localStorage.getItem(STORAGE_KEYS.CHECKLIST);
@@ -146,26 +121,16 @@ class EventStore {
     this.notify();
   }
 
-  async toggleChecklistItem(id) {
+  async toggleChecklistItem(id, claimedByOverride) {
     const target = this.checklist.find(x => x.id === id);
     if (!target) return;
 
     target.completed = !target.completed;
-    if (target.completed && !target.claimedBy) {
-      const name = prompt("Kto przynosi ten przedmiot? (Podaj imię):");
-      if (name) target.claimedBy = name.trim();
+    if (claimedByOverride !== undefined) {
+      target.claimedBy = claimedByOverride;
     }
 
-    if (isSupabaseConfigured()) {
-      try {
-        await supabase.from('checklist').update({
-          completed: target.completed,
-          claimed_by: target.claimedBy
-        }).eq('id', id);
-      } catch (e) {
-        console.error("Supabase update error:", e);
-      }
-    }
+    await updateChecklistItemRemote(id, { completed: target.completed, claimedBy: target.claimedBy });
 
     localStorage.setItem(STORAGE_KEYS.CHECKLIST, JSON.stringify(this.checklist));
     this.notify();
@@ -179,17 +144,7 @@ class EventStore {
       completed: false
     };
 
-    if (isSupabaseConfigured()) {
-      try {
-        await supabase.from('checklist').insert([{
-          item_name: newItem.item,
-          claimed_by: null,
-          completed: false
-        }]);
-      } catch (e) {
-        console.error("Supabase insert error:", e);
-      }
-    }
+    await insertChecklistItemRemote(itemName);
 
     this.checklist.push(newItem);
     localStorage.setItem(STORAGE_KEYS.CHECKLIST, JSON.stringify(this.checklist));
