@@ -1,4 +1,5 @@
 import { eventStore } from '../../store/eventStore.js';
+import { formatDateShortPl, formatDayNamePl, formatDeadlineShortPl, formatDeadlineTimePl } from '../../utils/format.js';
 
 export function initEventInfo() {
   render();
@@ -14,15 +15,19 @@ function render() {
   setText('hero-title', `Ognisko w ${placeName} `);
   setText('hero-title-year', extractYear(d.eventTargetDate) || '2026');
   setText('hero-subtitle', buildHeroSubtitle(d));
-  
-  setText('info-date', d.dateString);
-  setText('info-date-sub', d.timeString || 'Najwcześniejszy przyjazd: 18:00 - 19:00');
-  setText('info-rsvp-deadline', d.rsvpDeadlineString);
+
+  // Info cards — short format values
+  setText('info-date', formatDateShortPl(d.eventTargetDate));
+  setText('info-date-sub', `Najwcze\u015Bniejszy przyjazd`);
+  setText('info-rsvp-deadline', formatDeadlineShortPl(d.rsvpDeadlineDate));
+  setText('info-rsvp-deadline-sub', 'Ostateczny termin');
   setText('info-location', placeName);
-  
-  setText('map-location-name', `${placeName} (Działka)`);
+
+  // Map section
+  setText('map-location-name', `${placeName} (Dzia\u0142ka)`);
   setText('map-coords', `${d.coords.lat}, ${d.coords.lng}`);
 
+  // Links
   setHref('link-call-organizer', `tel:${d.hostPhoneRaw}`);
   setHref('link-maps-search', `https://www.google.com/maps/search/${d.coords.lat},+${d.coords.lng}`);
   setHref('link-maps-directions', `https://www.google.com/maps/dir/?api=1&destination=${d.coords.lat},${d.coords.lng}`);

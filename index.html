@@ -85,33 +85,61 @@
   <!-- QUICK INFO CARDS -->
   <section class="section quick-info reveal">
     <div class="container grid-3">
-      <div class="info-card glass-panel">
-        <div class="info-icon"><i data-lucide="calendar"></i></div>
-        <div>
-          <h4>Termin Ogniska</h4>
-          <p id="info-date">Sobota, 12 Września 2026</p>
-          <span class="subtext" id="info-date-sub">Najwcześniejszy przyjazd: 18:00 - 19:00</span>
+
+      <div class="info-card glass-panel info-card--ember">
+        <div class="info-card__accent"></div>
+        <div class="info-card__icon">
+          <i data-lucide="calendar"></i>
+          <div class="info-card__icon-glow"></div>
+        </div>
+        <div class="info-card__body">
+          <span class="info-card__label">Termin Ogniska</span>
+          <h3 class="info-card__value" id="info-date">12 Września 2026</h3>
+          <span class="info-card__sub">Sobota</span>
+        </div>
+        <div class="info-card__footer">
+          <div class="info-card__tag"><i data-lucide="clock" style="width:12px; height:12px;"></i> 18:00 - 19:00</div>
+          <span class="info-card__hint" id="info-date-sub">Najwcześniejszy przyjazd</span>
         </div>
       </div>
 
-      <div class="info-card glass-panel">
-        <div class="info-icon"><i data-lucide="clock"></i></div>
-        <div>
-          <h4>Termin Zgłoszeń</h4>
-          <p id="info-rsvp-deadline">Niedziela, 6 Września 2026</p>
-          <span class="subtext" id="info-rsvp-deadline-sub">Potwierdzenia do godz. 23:59</span>
+      <div class="info-card glass-panel info-card--amber">
+        <div class="info-card__accent"></div>
+        <div class="info-card__icon">
+          <i data-lucide="hourglass"></i>
+          <div class="info-card__icon-glow"></div>
+        </div>
+        <div class="info-card__body">
+          <span class="info-card__label">Termin Zgłoszeń (RSVP)</span>
+          <h3 class="info-card__value" id="info-rsvp-deadline">6 Września 2026</h3>
+          <span class="info-card__sub">Niedziela</span>
+        </div>
+        <div class="info-card__footer">
+          <div class="info-card__tag"><i data-lucide="bell-ring" style="width:12px; height:12px;"></i> do godz. 23:59</div>
+          <span class="info-card__hint" id="info-rsvp-deadline-sub">Ostateczny termin</span>
         </div>
       </div>
 
-      <div class="info-card glass-panel">
-        <div class="info-icon"><i data-lucide="map-pin"></i></div>
-        <div>
-          <h4>Lokalizacja</h4>
-          <p id="info-location">Wołkowyja, nad Jeziorem Solińskim</p>
+      <div class="info-card glass-panel info-card--pine">
+        <div class="info-card__accent"></div>
+        <div class="info-card__icon">
+          <i data-lucide="map-pin"></i>
+          <div class="info-card__icon-glow"></div>
+        </div>
+        <div class="info-card__body">
+          <span class="info-card__label">Lokalizacja</span>
+          <h3 class="info-card__value" id="info-location">Wołkowyja</h3>
+          <span class="info-card__sub">Bieszczady, Jezioro Solińskie</span>
+        </div>
+        <div class="info-card__footer">
+          <div class="info-card__tag info-card__tag--mono"><i data-lucide="crosshair" style="width:12px; height:12px;"></i> 49.3419 N, 22.4337 E</div>
+          <span class="info-card__hint">Współrzędne GPS</span>
         </div>
       </div>
+
     </div>
   </section>
+
 
   <!-- ARRIVAL & DIRECTIONS MODULE -->
   <section class="section arrival-section reveal" id="arrival-section">
