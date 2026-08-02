@@ -2,9 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
   flex-wrap: wrap;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
+}
+
+.guest-list-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
 }
 
 .guest-stats {

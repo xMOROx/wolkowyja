@@ -32,9 +32,7 @@ h2 {
   margin-bottom: var(--space-xs);
 }
 
-h3 {
-  margin-bottom: var(--space-lg);
-}
+
 
 p {
   margin-bottom: var(--space-sm);
@@ -93,8 +91,8 @@ p:last-child {
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-xs);
-  padding: 6px 14px;
+  gap: 6px;
+  padding: 5px 12px;
   background: rgba(249, 115, 22, 0.1);
   border: 1px solid rgba(249, 115, 22, 0.25);
   color: var(--color-accent-amber);
