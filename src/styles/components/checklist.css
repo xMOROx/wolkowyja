@@ -1,5 +1,5 @@
 .progress-bar-container {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .progress-label {
@@ -7,7 +7,7 @@
   justify-content: space-between;
   font-size: 0.8125rem;
   color: var(--color-text-muted);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .progress-track {
@@ -29,8 +29,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
-  margin-bottom: var(--space-md);
-  max-height: 280px;
+  margin-bottom: var(--space-lg);
+  max-height: 340px;
   overflow-y: auto;
 }
 
@@ -38,7 +38,7 @@
   background: rgba(9, 13, 22, 0.5);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 10px 14px;
+  padding: var(--space-sm) var(--space-md);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -58,4 +58,15 @@
 .check-item.completed span {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+/* Add item row */
+.add-item-box {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.add-item-box .form-input {
+  flex: 1;
 }

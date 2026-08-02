@@ -1,13 +1,7 @@
-import { EVENT_DETAILS_FALLBACK, INITIAL_GUESTS, INITIAL_CHECKLIST } from '../data/fallbackData.js';
 import { supabase, isSupabaseConfigured } from '../services/supabaseClient.js';
 import { fetchEventConfig } from '../services/eventConfigService.js';
 import { fetchGuestsRemote, upsertGuestRemote } from '../services/guestsService.js';
 import { fetchChecklistRemote, insertChecklistItemRemote, updateChecklistItemRemote } from '../services/checklistService.js';
-
-const STORAGE_KEYS = {
-  GUESTS: 'wolkowyja_v2_guests',
-  CHECKLIST: 'wolkowyja_v2_checklist'
-};
 
 class EventStore {
   constructor() {
@@ -53,7 +47,9 @@ class EventStore {
 
   async loadEventConfig() {
     const remoteConfig = await fetchEventConfig();
-    this.eventDetails = remoteConfig || EVENT_DETAILS_FALLBACK;
+    if (remoteConfig) {
+      this.eventDetails = remoteConfig;
+    }
     this.notify();
   }
 
@@ -61,20 +57,6 @@ class EventStore {
     const remoteGuests = await fetchGuestsRemote();
     if (remoteGuests) {
       this.guests = remoteGuests;
-      this.notify();
-      return;
-    }
-
-    const saved = localStorage.getItem(STORAGE_KEYS.GUESTS);
-    if (!saved) {
-      this.guests = INITIAL_GUESTS;
-      localStorage.setItem(STORAGE_KEYS.GUESTS, JSON.stringify(INITIAL_GUESTS));
-    } else {
-      try {
-        this.guests = JSON.parse(saved);
-      } catch (e) {
-        this.guests = INITIAL_GUESTS;
-      }
     }
     this.notify();
   }
@@ -95,28 +77,13 @@ class EventStore {
       this.guests.unshift(newGuest);
     }
 
-    localStorage.setItem(STORAGE_KEYS.GUESTS, JSON.stringify(this.guests));
     this.notify();
   }
 
   async loadChecklist() {
     const remoteChecklist = await fetchChecklistRemote();
-    if (remoteChecklist && remoteChecklist.length > 0) {
+    if (remoteChecklist) {
       this.checklist = remoteChecklist;
-      this.notify();
-      return;
-    }
-
-    const saved = localStorage.getItem(STORAGE_KEYS.CHECKLIST);
-    if (!saved) {
-      this.checklist = INITIAL_CHECKLIST;
-      localStorage.setItem(STORAGE_KEYS.CHECKLIST, JSON.stringify(INITIAL_CHECKLIST));
-    } else {
-      try {
-        this.checklist = JSON.parse(saved);
-      } catch (e) {
-        this.checklist = INITIAL_CHECKLIST;
-      }
     }
     this.notify();
   }
@@ -131,8 +98,6 @@ class EventStore {
     }
 
     await updateChecklistItemRemote(id, { completed: target.completed, claimedBy: target.claimedBy });
-
-    localStorage.setItem(STORAGE_KEYS.CHECKLIST, JSON.stringify(this.checklist));
     this.notify();
   }
 
@@ -147,7 +112,6 @@ class EventStore {
     await insertChecklistItemRemote(itemName);
 
     this.checklist.push(newItem);
-    localStorage.setItem(STORAGE_KEYS.CHECKLIST, JSON.stringify(this.checklist));
     this.notify();
   }
 }

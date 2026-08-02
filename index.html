@@ -27,7 +27,7 @@
   <!-- HERO BANNER -->
   <header class="hero">
     <div class="hero-overlay"></div>
-    
+
     <!-- Topographic Contours SVG Background -->
     <svg class="hero-contours" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" preserveAspectRatio="none">
       <path d="M-100,200 Q200,100 500,250 T1100,150" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
@@ -73,7 +73,7 @@
 
       <div class="hero-actions">
         <a href="#arrival-section" class="btn btn-primary">
-          <i data-lucide="navigation"></i> Instrukcja Dojazdu na Działkę
+          <i data-lucide="navigation"></i> Instrukcja Dojazdu
         </a>
         <a href="#rsvp-section" class="btn btn-secondary">
           <i data-lucide="user-check"></i> Potwierdź Obecność
@@ -107,8 +107,7 @@
         <div class="info-icon"><i data-lucide="map-pin"></i></div>
         <div>
           <h4>Lokalizacja</h4>
-          <p id="info-location">Wołkowyja</p>
-
+          <p id="info-location">Wołkowyja, nad Jeziorem Solińskim</p>
         </div>
       </div>
     </div>
@@ -118,9 +117,9 @@
   <section class="section arrival-section reveal" id="arrival-section">
     <div class="container">
       <div class="glass-panel arrival-card">
-        <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+        <div class="section-header">
           <div class="badge"><i data-lucide="compass"></i> Dojazd na Działkę</div>
-          <h2 style="margin-top: 8px;">Jesteś 10 Minut przed Przyjazdem?</h2>
+          <h2>Jesteś 10 Minut przed Przyjazdem?</h2>
           <p>Zapoznaj się z sekwencją kroków dojazdowych lub skontaktuj się z nami bezpośrednio przed skrętem.</p>
         </div>
 
@@ -144,7 +143,7 @@
       <div class="section-header">
         <div class="badge"><i data-lucide="map"></i> Lokalizacja GPS</div>
         <h2>Punkt Docelowy na Mapie</h2>
-        <p>Lokalizacja w Wołkowyi. Kliknij poniższy przycisk, aby uruchomić nawigację w aplikacji Google Maps.</p>
+        <p>Lokalizacja w Wołkowyi. Kliknij przycisk poniżej, aby uruchomić nawigację w Google Maps.</p>
       </div>
 
       <div class="map-layout">
@@ -179,7 +178,7 @@
       <div class="grid-2">
         <!-- RSVP Form -->
         <div class="glass-panel">
-          <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px;">
+          <h3 style="display: flex; align-items: center; gap: 8px;">
             <i data-lucide="user-plus"></i> Wypełnij Zgłoszenie
           </h3>
 
@@ -212,7 +211,7 @@
             </div>
 
             <div class="form-group" id="alcohol-group">
-              <label for="guest-alcohol">Jaki gatunek alkoholu preferujesz lub przynosisz?</label>
+              <label for="guest-alcohol">Jaki gatunek alkoholu preferujesz?</label>
               <input type="text" id="guest-alcohol" placeholder="np. Piwo, Wódka, Wino, Whisky" class="form-input">
             </div>
 
@@ -221,7 +220,7 @@
               <input type="text" id="guest-bringing" placeholder="np. Kiełbaski, chleb, przekąski" class="form-input">
             </div>
 
-            <button type="submit" class="btn btn-primary btn-full">
+            <button type="submit" class="btn btn-primary btn-full" style="margin-top: var(--space-sm);">
               <i data-lucide="check-circle"></i> Zapisz Zgłoszenie
             </button>
           </form>
@@ -230,7 +229,7 @@
         <!-- Guest List -->
         <div class="glass-panel">
           <div class="guest-list-header">
-            <h3>Lista Gości (<span id="confirmed-count">0</span> os.)</h3>
+            <h3 style="margin-bottom: 0;">Lista Gości (<span id="confirmed-count">0</span> os.)</h3>
             <div class="guest-stats">
               <span class="stat-tag tag-yes"><span id="stat-yes">0</span> Potwierdzonych</span>
               <span class="stat-tag tag-maybe"><span id="stat-maybe">0</span> Niezdecydowanych</span>
@@ -243,8 +242,8 @@
             <button class="filter-btn" data-filter="maybe">Niezdecydowani</button>
           </div>
 
-          <!-- Stats Bar Container (REQ-14) -->
-          <div id="guest-stats-bar-container" style="margin-bottom: 16px;"></div>
+          <!-- Stats Bar Container -->
+          <div id="guest-stats-bar-container" style="margin-bottom: var(--space-md);"></div>
 
           <div class="guest-list-scroll" id="guest-list-container">
             <!-- Dynamic list -->
@@ -258,9 +257,9 @@
   <section class="section checklist-section reveal">
     <div class="container">
       <div class="glass-panel">
-        <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+        <div class="section-header">
           <div class="badge"><i data-lucide="shopping-bag"></i> Wspólny Ekwipunek</div>
-          <h2 style="margin-top: 8px;">Lista Rzeczy do Przyniesienia</h2>
+          <h2>Lista Rzeczy do Przyniesienia</h2>
           <p>Zadeklaruj produkty, które przyniesiesz na ognisko, aby uniknąć dublowania zapasów.</p>
         </div>
 
@@ -279,7 +278,7 @@
         </div>
 
         <div class="add-item-box">
-          <input type="text" id="new-item-input" placeholder="Dodaj nową pozycję na listę..." class="form-input" style="flex:1;">
+          <input type="text" id="new-item-input" placeholder="Dodaj nową pozycję na listę..." class="form-input">
           <button id="btn-add-item" class="btn btn-secondary"><i data-lucide="plus"></i> Dodaj</button>
         </div>
       </div>
@@ -289,7 +288,25 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <p>Bieszczadzkie Ognisko w Wołkowyi &bull; 2026</p>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-icon"><i data-lucide="flame"></i></div>
+          <span class="footer-brand-name">Ognisko w Wołkowyi</span>
+        </div>
+
+        <nav class="footer-nav">
+          <a href="#arrival-section">Dojazd</a>
+          <a href="#map-section">Mapa</a>
+          <a href="#rsvp-section">RSVP</a>
+        </nav>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-meta">
+          <p>Bieszczady, Jezioro Solińskie</p>
+          <span class="footer-coords">49.341933 N, 22.433710 E</span>
+        </div>
+      </div>
     </div>
   </footer>
 

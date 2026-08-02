@@ -13,7 +13,6 @@ const filesToInclude = [
   'src/config.js',
   'src/main.js',
   'src/style.css',
-  'src/data/fallbackData.js',
   'src/services/supabaseClient.js',
   'src/services/eventConfigService.js',
   'src/services/guestsService.js',

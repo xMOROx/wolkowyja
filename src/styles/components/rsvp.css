@@ -3,6 +3,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+  gap: var(--space-xs);
 }
 
 .guest-stats {
@@ -13,9 +15,9 @@
 .guest-filters {
   display: flex;
   gap: var(--space-xs);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
   border-bottom: 1px solid var(--color-border);
-  padding-bottom: var(--space-xs);
+  padding-bottom: var(--space-sm);
 }
 
 .filter-btn {
@@ -25,9 +27,10 @@
   font-size: 0.8125rem;
   font-weight: 600;
   cursor: pointer;
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 9999px;
   transition: all var(--transition-fast);
+  font-family: var(--font-sans);
 }
 
 .filter-btn:hover {
@@ -74,7 +77,7 @@
 }
 
 .guest-list-scroll {
-  max-height: 380px;
+  max-height: 400px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
