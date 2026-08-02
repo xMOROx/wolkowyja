@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ognisko w Wołkowyi 🔥 | Spotkanie Ekipy</title>
+  <meta name="description" content="Oficjalna strona wydarzenia: Ognisko dla znajomych w Wołkowyi nad Jeziorem Solińskim. Nawigacja, lista gości, ekwipunek i wspólny dojazd.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+  <!-- HERO BANNER -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="badge glow-badge">
+        <i data-lucide="flame" class="icon-flame"></i> Bieszczadzki Klimat 2026
+      </div>
+      <h1 class="hero-title">Ognisko w Wołkowyi <span class="text-gradient">🔥</span></h1>
+      <p class="hero-subtitle"> Spotkanie ekipy nad Jeziorem Solińskim. Kiełbaski, gitara, zimne napoje i wieczór przy gwiazdach!</p>
+
+      <!-- COUNTDOWN TIMER -->
+      <div class="countdown-card glass-panel" id="countdown-container">
+        <h3 class="countdown-label"><i data-lucide="timer"></i> Do ogniska zostało:</h3>
+        <div class="countdown-grid">
+          <div class="time-block">
+            <span id="days">00</span>
+            <small>Dni</small>
+          </div>
+          <div class="time-block">
+            <span id="hours">00</span>
+            <small>Godzin</small>
+          </div>
+          <div class="time-block">
+            <span id="minutes">00</span>
+            <small>Minut</small>
+          </div>
+          <div class="time-block">
+            <span id="seconds">00</span>
+            <small>Sekund</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#map-section" class="btn btn-primary btn-glow">
+          <i data-lucide="navigation"></i> Wyznacz Trasę Dojazdu
+        </a>
+        <a href="#rsvp-section" class="btn btn-secondary">
+          <i data-lucide="user-check"></i> Potwierdź Obecność
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- QUICK INFO CARDS -->
+  <section class="section quick-info">
+    <div class="container grid-3">
+      <div class="info-card glass-panel">
+        <div class="info-icon"><i data-lucide="calendar"></i></div>
+        <div>
+          <h4>Kiedy?</h4>
+          <p id="event-date">Sobota, 15 Sierpnia 2026</p>
+          <span class="subtext">Start o godzinie 17:00</span>
+        </div>
+      </div>
+      <div class="info-card glass-panel">
+        <div class="info-icon"><i data-lucide="map-pin"></i></div>
+        <div>
+          <h4>Gdzie?</h4>
+          <p>Wołkowyja</p>
+          <span class="subtext">Nad Jeziorem Solińskim, Bieszczady</span>
+        </div>
+      </div>
+      <div class="info-card glass-panel">
+        <div class="info-icon"><i data-lucide="cloud-sun"></i></div>
+        <div>
+          <h4>Pogoda (Wołkowyja)</h4>
+          <p id="weather-text">23°C • Słonecznie / Czyste niebo</p>
+          <span class="subtext">Idealne warunki na wieczorne ognisko!</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP & ROUTE FINDER -->
+  <section class="section map-section" id="map-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="badge"><i data-lucide="map"></i> Lokalizacja & Dojazd</div>
+        <h2>Mapa z Punctem & Wyznaczanie Trasy</h2>
+        <p>Kliknij przycisk poniżej, aby automatycznie odczytać Twoją lokalizację GPS i wyznaczyć najlepszy dojazd do Wołkowyi.</p>
+      </div>
+
+      <div class="map-layout">
+        <!-- Control Box -->
+        <div class="map-controls glass-panel">
+          <div class="location-box">
+            <div class="loc-item">
+              <span class="dot origin-dot"></span>
+              <div>
+                <small>Twoja lokalizacja:</small>
+                <strong id="user-location-text">Nie określono (Kliknij przycisk poniżej)</strong>
+              </div>
+            </div>
+            <div class="loc-divider"></div>
+            <div class="loc-item">
+              <span class="dot dest-dot"></span>
+              <div>
+                <small>Cel (Miejsce Ogniska):</small>
+                <strong>Wołkowyja (49.341933, 22.433710)</strong>
+              </div>
+            </div>
+          </div>
+
+          <div id="route-info" class="route-info-box hidden">
+            <div class="route-metric">
+              <i data-lucide="milestone"></i>
+              <div>
+                <span>Odległość</span>
+                <strong id="route-distance">-- km</strong>
+              </div>
+            </div>
+            <div class="route-metric">
+              <i data-lucide="clock"></i>
+              <div>
+                <span>Szacowany czas</span>
+                <strong id="route-duration">-- min</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-button-group">
+            <button id="btn-get-location" class="btn btn-primary btn-full btn-glow">
+              <i data-lucide="crosshair"></i> Wyznacz Trasę z Mojej Lokalizacji
+            </button>
+            
+            <a id="btn-google-maps-nav" href="https://www.google.com/maps/search/49.341933,+22.433710" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-full">
+              <i data-lucide="external-link"></i> Otwórz w Google Maps App
+            </a>
+          </div>
+
+          <div id="location-error" class="error-msg hidden"></div>
+        </div>
+
+        <!-- Leaflet Map Container -->
+        <div class="map-wrapper glass-panel">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP & GUEST LIST -->
+  <section class="section rsvp-section" id="rsvp-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="badge"><i data-lucide="users"></i> Lista Gości & Potwierdzenia</div>
+        <h2>Kto Weźmie Udział?</h2>
+        <p>Potwierdź swoją obecność, abyśmy wiedzieli ile kiełbasek i napojów przygotować!</p>
+      </div>
+
+      <div class="grid-2 rsvp-grid">
+        <!-- Formularz Dodawania -->
+        <div class="glass-panel rsvp-form-card">
+          <h3><i data-lucide="user-plus"></i> Potwierdź Swoją Obecność</h3>
+          <form id="rsvp-form">
+            <div class="form-group">
+              <label for="guest-name">Twoje Imię / Pseudonim *</label>
+              <input type="text" id="guest-name" placeholder="np. Bartek" required class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label for="guest-status">Czy będziesz? *</label>
+              <select id="guest-status" required class="form-input">
+                <option value="yes">🔥 Będę na 100%</option>
+                <option value="maybe">🤔 Może / Jeszcze nie wiem</option>
+                <option value="no">❌ Niestety nie dam rady</option>
+              </select>
+            </div>
+
+            <div class="form-group grid-2-sm">
+              <div>
+                <label for="guest-plus">Osoby towarzyszące (+X)</label>
+                <input type="number" id="guest-plus" min="0" max="10" value="0" class="form-input">
+              </div>
+              <div>
+                <label for="guest-transport">Dojazd</label>
+                <select id="guest-transport" class="form-input">
+                  <option value="car_driver">🚗 Jadę autem (mam miejsca)</option>
+                  <option value="car_passenger">🚘 Jadę z kimś w aucie</option>
+                  <option value="needs_ride">🙋 Szukam transportu</option>
+                  <option value="other">🚲 Inne / Na miejscu</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="guest-bringing">Co przynosisz ze sobą?</label>
+              <input type="text" id="guest-bringing" placeholder="np. Kiełbaski, głośnik, dodatkowe drewno..." class="form-input">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full btn-glow">
+              <i data-lucide="check-circle"></i> Zapisz Moje Potwierdzenie
+            </button>
+          </form>
+        </div>
+
+        <!-- Lista Gości -->
+        <div class="glass-panel guest-list-card">
+          <div class="guest-list-header">
+            <h3><i data-lucide="list-checks"></i> Zgłoszeni Goście (<span id="confirmed-count">0</span>)</h3>
+            <div class="guest-stats">
+              <span class="stat-tag tag-yes"><i data-lucide="check"></i> <span id="stat-yes">0</span> Będą</span>
+              <span class="stat-tag tag-maybe"><i data-lucide="help-circle"></i> <span id="stat-maybe">0</span> Może</span>
+            </div>
+          </div>
+
+          <div class="guest-filter">
+            <button class="filter-btn active" data-filter="all">Wszyscy</button>
+            <button class="filter-btn" data-filter="yes">Będą na 100%</button>
+            <button class="filter-btn" data-filter="maybe">Niezdecydowani</button>
+          </div>
+
+          <div id="guest-list-container" class="guest-list-scroll">
+            <!-- Renderowane dynamicznie w JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPMENT CHECKLIST & CARPOOLING -->
+  <section class="section info-tools-section">
+    <div class="container grid-2">
+      
+      <!-- Lista Ekwipunku / Kto Co Przynosi -->
+      <div class="glass-panel tool-card">
+        <div class="card-header-flex">
+          <div>
+            <h3><i data-lucide="shopping-bag"></i> Lista Ekwipunku na Ognisko</h3>
+            <p class="subtext">Kto co zabiera? Zadeklaruj produkty, żeby niczego nie brakowało!</p>
+          </div>
+        </div>
+
+        <div class="progress-bar-container">
+          <div class="progress-label">
+            <span>Postęp przygotowań</span>
+            <strong id="checklist-progress-text">0%</strong>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="checklist-progress-fill"></div>
+          </div>
+        </div>
+
+        <div id="checklist-container" class="checklist-items">
+          <!-- Renderowane w JS -->
+        </div>
+
+        <div class="add-item-box">
+          <input type="text" id="new-item-input" placeholder="Dodaj nową pozycję na listę..." class="form-input-sm">
+          <button id="btn-add-item" class="btn btn-secondary btn-sm"><i data-lucide="plus"></i> Dodaj</button>
+        </div>
+      </div>
+
+      <!-- Carpooling / Przejazdy -->
+      <div class="glass-panel tool-card">
+        <div class="card-header-flex">
+          <div>
+            <h3><i data-lucide="car"></i> Wspólny Dojazd / Carpooling</h3>
+            <p class="subtext">Masz wolne miejsce w aucie lub szukasz transportu? Zgłoś się!</p>
+          </div>
+        </div>
+
+        <div id="carpool-list-container" class="carpool-items">
+          <!-- Renderowane w JS -->
+        </div>
+
+        <button id="btn-open-carpool-modal" class="btn btn-secondary btn-full margin-top-auto">
+          <i data-lucide="plus-circle"></i> Zgłoś Auto / Dodaj Wolne Miejsca
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DETAILS, RULES & SPOTIFY -->
+  <section class="section rules-section">
+    <div class="container grid-3">
+      
+      <div class="glass-panel feature-box">
+        <div class="feature-icon"><i data-lucide="clipboard-list"></i></div>
+        <h3>Co Warto Zabrać?</h3>
+        <ul class="feature-list">
+          <li><i data-lucide="check-square"></i> Ciepła bluza / kurtka na wieczór</li>
+          <li><i data-lucide="check-square"></i> Koc lub krzesełko turystyczne</li>
+          <li><i data-lucide="check-square"></i> Spray na komary i kleszcze</li>
+          <li><i data-lucide="check-square"></i> Latarka / czołówka</li>
+          <li><i data-lucide="check-square"></i> Dobre nastawienie i uśmiech!</li>
+        </ul>
+      </div>
+
+      <div class="glass-panel feature-box">
+        <div class="feature-icon"><i data-lucide="shield-alert"></i></div>
+        <h3>Zasady na Miejscu</h3>
+        <ul class="feature-list">
+          <li><i data-lucide="alert-circle"></i> Dbamy o czystość – śmieci zabieramy ze sobą</li>
+          <li><i data-lucide="alert-circle"></i> Bezpieczeństwo przy ogniu to podstawa</li>
+          <li><i data-lucide="alert-circle"></i> Kierowcy – absolutne 0% alkoholu!</li>
+          <li><i data-lucide="alert-circle"></i> Pomagamy przy zbieraniu drewna i sprzątaniu</li>
+        </ul>
+      </div>
+
+      <div class="glass-panel feature-box">
+        <div class="feature-icon"><i data-lucide="music"></i></div>
+        <h3>Muzyka i Playlista</h3>
+        <p class="subtext">Masz ulubione piosenki na ognisko? Dodaj je do naszej wspólnej playlisty Spotify lub przynieś gitarę!</p>
+        <div class="music-actions margin-top-auto">
+          <a href="https://spotify.com" target="_blank" class="btn btn-spotify btn-full">
+            <i data-lucide="disc"></i> Otwórz Playlistę Spotify
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CARPOOL MODAL -->
+  <div id="carpool-modal" class="modal-overlay hidden">
+    <div class="modal-card glass-panel">
+      <button id="btn-close-carpool-modal" class="modal-close"><i data-lucide="x"></i></button>
+      <h3><i data-lucide="car"></i> Zgłoś Auto / Przejazd</h3>
+      <form id="carpool-form">
+        <div class="form-group">
+          <label for="carpool-driver">Kierowca (Imię)</label>
+          <input type="text" id="carpool-driver" placeholder="np. Patryk" required class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="carpool-from">Skąd wyjeżdżasz?</label>
+          <input type="text" id="carpool-from" placeholder="np. Rzeszów / Sanok" required class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="carpool-seats">Liczba wolnych miejsc</label>
+          <input type="number" id="carpool-seats" min="1" max="8" value="3" required class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="carpool-time">Wyjazd (Godzina)</label>
+          <input type="text" id="carpool-time" placeholder="np. 16:00 z rynku" class="form-input">
+        </div>
+        <button type="submit" class="btn btn-primary btn-full btn-glow">
+          <i data-lucide="plus"></i> Opublikuj Przejazd
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>🔥 Ognisko w Wołkowyi 2026 • Widzimy się na miejscu! <i data-lucide="heart" class="icon-heart"></i></p>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Main Script -->
+  <script type="module" src="/src/main.js"></script>
+
+</body>
+</html>
