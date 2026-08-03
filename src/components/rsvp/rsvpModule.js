@@ -146,13 +146,13 @@ export function renderGuestList() {
 
     return `
       <div class="guest-item">
-        <div style="display:flex; align-items:center; gap:12px; min-width:0;">
-          <div class="guest-avatar" style="background:${avatarBg}; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#0B1220; flex-shrink:0; font-size:0.85rem;">${initial}</div>
-          <div class="guest-info" style="min-width:0;">
-            <strong style="font-size: 0.95rem; color: #FFF; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(g.name)}</strong>
-            <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 2px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+        <div style="display:flex; align-items:center; gap:10px; min-width:0; width:100%; box-sizing:border-box;">
+          <div class="guest-avatar" style="background:${avatarBg}; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#0B1220; flex-shrink:0; font-size:0.8rem;">${initial}</div>
+          <div class="guest-info" style="min-width:0; flex:1; overflow:hidden;">
+            <strong style="font-size: 0.9rem; color: #FFF; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(g.name)}</strong>
+            <div style="font-size: 0.775rem; color: var(--color-text-muted); margin-top: 2px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
               ${alcoholBadge}
-              <span>Przynosi: <i>${escapeHtml(g.bringing)}</i></span>
+              <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:100%;">Przynosi: <i>${escapeHtml(g.bringing)}</i></span>
             </div>
           </div>
         </div>

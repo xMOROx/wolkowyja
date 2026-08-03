@@ -7,6 +7,8 @@
   box-shadow: var(--shadow-card);
   padding: var(--space-xl) var(--space-xl) var(--space-lg);
   transition: border-color var(--transition-normal), transform var(--transition-normal), box-shadow var(--transition-normal);
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .glass-panel:hover {

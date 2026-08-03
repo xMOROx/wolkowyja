@@ -1,13 +1,11 @@
 import { supabase, isSupabaseConfigured } from '../services/supabaseClient.js';
 import { fetchEventConfig } from '../services/eventConfigService.js';
 import { fetchGuestsRemote, upsertGuestRemote } from '../services/guestsService.js';
-import { fetchChecklistRemote, insertChecklistItemRemote, updateChecklistItemRemote } from '../services/checklistService.js';
 
 class EventStore {
   constructor() {
     this.eventDetails = null;
     this.guests = [];
-    this.checklist = [];
     this.listeners = [];
   }
 
@@ -25,7 +23,6 @@ class EventStore {
   async init() {
     await this.loadEventConfig();
     await this.loadGuests();
-    await this.loadChecklist();
 
     if (isSupabaseConfigured()) {
       supabase
@@ -36,11 +33,6 @@ class EventStore {
       supabase
         .channel('public:guests_v1')
         .on('postgres_changes', { event: '*', schema: 'public', table: 'guests' }, () => this.loadGuests())
-        .subscribe();
-
-      supabase
-        .channel('public:checklist_v1')
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'checklist' }, () => this.loadChecklist())
         .subscribe();
     }
   }
@@ -77,41 +69,6 @@ class EventStore {
       this.guests.unshift(newGuest);
     }
 
-    this.notify();
-  }
-
-  async loadChecklist() {
-    const remoteChecklist = await fetchChecklistRemote();
-    if (remoteChecklist) {
-      this.checklist = remoteChecklist;
-    }
-    this.notify();
-  }
-
-  async toggleChecklistItem(id, claimedByOverride) {
-    const target = this.checklist.find(x => x.id === id);
-    if (!target) return;
-
-    target.completed = !target.completed;
-    if (claimedByOverride !== undefined) {
-      target.claimedBy = claimedByOverride;
-    }
-
-    await updateChecklistItemRemote(id, { completed: target.completed, claimedBy: target.claimedBy });
-    this.notify();
-  }
-
-  async addChecklistItem(itemName) {
-    const newItem = {
-      id: 'c_' + Date.now(),
-      item: itemName,
-      claimedBy: null,
-      completed: false
-    };
-
-    await insertChecklistItemRemote(itemName);
-
-    this.checklist.push(newItem);
     this.notify();
   }
 }

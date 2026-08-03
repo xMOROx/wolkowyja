@@ -43,7 +43,7 @@ function renderPackingItems(items) {
   if (!container) return;
 
   if (!Array.isArray(items) || items.length === 0) {
-    container.innerHTML = `<div style="text-align: center; color: var(--color-text-muted); padding: 24px 0; grid-column: 1 / -1;">Brak zdefiniowanych pozycji — zabierz ze sobą to, co uważasz za przydatne na ognisko!</div>`;
+    container.innerHTML = `<div style="text-align: center; color: var(--color-text-muted); padding: 24px 0; grid-column: 1 / -1;">Zabierz ze sobą to, co uważasz za przydatne na ognisko!</div>`;
     return;
   }
 
