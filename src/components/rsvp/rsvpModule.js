@@ -1,3 +1,4 @@
+import { createIcons, icons } from 'lucide';
 import { eventStore } from '../../store/eventStore.js';
 import { escapeHtml } from '../../utils/dom.js';
 import { nameToColor } from '../../utils/color.js';
@@ -160,5 +161,5 @@ export function renderGuestList() {
     `;
   }).join('');
 
-  if (window.lucide) window.lucide.createIcons();
+  createIcons({ icons });
 }

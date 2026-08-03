@@ -1,3 +1,4 @@
+import { createIcons, icons } from 'lucide';
 import { eventStore } from '../../store/eventStore.js';
 import { formatDateShortPl, formatDayNamePl, formatDeadlineShortPl, formatDeadlineTimePl } from '../../utils/format.js';
 import { escapeHtml } from '../../utils/dom.js';
@@ -56,7 +57,7 @@ function renderPackingItems(items) {
     </div>
   `).join('');
 
-  if (window.lucide) window.lucide.createIcons();
+  createIcons({ icons });
 }
 
 function setText(id, value) {
