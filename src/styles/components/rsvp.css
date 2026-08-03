@@ -15,6 +15,7 @@
 .guest-stats {
   display: flex;
   gap: var(--space-xs);
+  flex-wrap: wrap;
 }
 
 .guest-filters {
@@ -23,6 +24,7 @@
   margin-bottom: var(--space-lg);
   border-bottom: 1px solid var(--color-border);
   padding-bottom: var(--space-sm);
+  flex-wrap: wrap;
 }
 
 .filter-btn {
@@ -36,6 +38,7 @@
   border-radius: 9999px;
   transition: all var(--transition-fast);
   font-family: var(--font-sans);
+  white-space: nowrap;
 }
 
 .filter-btn:hover {
@@ -58,6 +61,7 @@
   gap: 4px;
   font-weight: 600;
   border: 1px solid var(--color-border);
+  white-space: nowrap;
 }
 
 .tag-yes {
@@ -79,6 +83,7 @@
   padding: 2px 8px;
   border-radius: 4px;
   border: 1px solid rgba(249, 115, 22, 0.3);
+  word-break: break-word;
 }
 
 .guest-list-scroll {
@@ -87,6 +92,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
+  width: 100%;
 }
 
 .guest-item {
@@ -97,6 +103,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* Skeleton Loading State */
@@ -116,10 +125,17 @@
   .guest-list-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: var(--space-xs);
   }
 
   .guest-filters {
-    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--space-md);
+  }
+
+  .filter-btn {
+    padding: 5px 10px;
+    font-size: 0.75rem;
   }
 
   .guest-item {

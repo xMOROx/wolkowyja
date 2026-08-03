@@ -103,7 +103,7 @@ export function renderGuestList() {
 
       statsBarContainer.classList.remove('hidden');
       statsBarContainer.innerHTML = `
-        <div class="stats-bar-labels" style="display:flex; justify-content:space-between; font-size:0.775rem; color:var(--color-text-muted); margin-bottom:4px;">
+        <div class="stats-bar-labels" style="display:flex; justify-content:space-between; font-size:0.775rem; color:var(--color-text-muted); margin-bottom:4px; flex-wrap:wrap; gap:4px;">
           <span>Pije alkohol: <strong>${drinkingCount}</strong> (${drinkingPct}%)</span>
           <span>Nie pije / Kierowca: <strong>${nonDrinkingCount}</strong> (${nonDrinkingPct}%)</span>
         </div>
