@@ -1,5 +1,6 @@
 import { eventStore } from '../../store/eventStore.js';
 import { formatDateShortPl, formatDayNamePl, formatDeadlineShortPl, formatDeadlineTimePl } from '../../utils/format.js';
+import { escapeHtml } from '../../utils/dom.js';
 
 export function initEventInfo() {
   render();
@@ -18,19 +19,44 @@ function render() {
 
   // Info cards — short format values
   setText('info-date', formatDateShortPl(d.eventTargetDate));
-  setText('info-date-sub', `Najwcze\u015Bniejszy przyjazd`);
+  setText('info-date-sub', `Najwcześniejszy przyjazd`);
   setText('info-rsvp-deadline', formatDeadlineShortPl(d.rsvpDeadlineDate));
   setText('info-rsvp-deadline-sub', 'Ostateczny termin');
   setText('info-location', placeName);
 
   // Map section
-  setText('map-location-name', `${placeName} (Dzia\u0142ka)`);
+  setText('map-location-name', `${placeName} (Działka)`);
   setText('map-coords', `${d.coords.lat}, ${d.coords.lng}`);
 
   // Links
   setHref('link-call-organizer', `tel:${d.hostPhoneRaw}`);
   setHref('link-maps-search', `https://www.google.com/maps/search/${d.coords.lat},+${d.coords.lng}`);
   setHref('link-maps-directions', `https://www.google.com/maps/dir/?api=1&destination=${d.coords.lat},${d.coords.lng}`);
+
+  // Packing Items
+  renderPackingItems(d.packingItems);
+}
+
+function renderPackingItems(items) {
+  const container = document.getElementById('packing-items-container');
+  if (!container) return;
+
+  if (!Array.isArray(items) || items.length === 0) {
+    container.innerHTML = `<div style="text-align: center; color: var(--color-text-muted); padding: 24px 0; grid-column: 1 / -1;">Brak zdefiniowanych pozycji — zabierz ze sobą to, co uważasz za przydatne na ognisko!</div>`;
+    return;
+  }
+
+  container.innerHTML = items.map(item => `
+    <div class="packing-item">
+      <div class="packing-item__icon"><i data-lucide="${escapeHtml(item.icon || 'check-circle')}"></i></div>
+      <div class="packing-item__body">
+        <strong>${escapeHtml(item.title || '')}</strong>
+        <span>${escapeHtml(item.desc || '')}</span>
+      </div>
+    </div>
+  `).join('');
+
+  if (window.lucide) window.lucide.createIcons();
 }
 
 function setText(id, value) {
@@ -44,7 +70,7 @@ function setHref(id, value) {
 }
 
 function extractPlaceName(locationName) {
-  if (!locationName) return 'Wołkowyi';
+  if (!locationName) return 'Wołkowyja';
   return locationName.split(',')[0].trim();
 }
 

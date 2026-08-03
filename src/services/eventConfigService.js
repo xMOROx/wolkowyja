@@ -14,7 +14,8 @@ function mapRow(row) {
     hostPhone: row.host_phone_display,
     hostPhoneRaw: row.host_phone_raw,
     arrivalInstructions: row.arrival_instructions,
-    arrivalSteps: Array.isArray(row.arrival_steps) ? row.arrival_steps : []
+    arrivalSteps: Array.isArray(row.arrival_steps) ? row.arrival_steps : [],
+    packingItems: Array.isArray(row.packing_items) ? row.packing_items : []
   };
 }
 

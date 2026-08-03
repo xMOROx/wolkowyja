@@ -4,7 +4,7 @@ This guide outlines the configuration of Supabase database schemas and automated
 
 ---
 
-## 1. Supabase Database Schema Setup (Migration 002)
+## 1. Supabase Database Schema Setup
 
 To enable real-time multi-user synchronization across all client devices, execute the following SQL script in the Supabase **SQL Editor**:
 
@@ -22,6 +22,7 @@ create table if not exists public.event_config (
   host_phone_raw text not null,
   arrival_instructions text not null,
   arrival_steps jsonb not null default '[]'::jsonb,
+  packing_items jsonb not null default '[]'::jsonb,
   updated_at timestamptz not null default timezone('utc'::text, now()),
   constraint event_config_single_row check (id = 1)
 );
@@ -36,7 +37,7 @@ alter publication supabase_realtime add table public.event_config;
 -- Wstawienie domyślnych danych wydarzenia
 insert into public.event_config (
   id, title, location_name, lat, lng, event_date, rsvp_deadline,
-  host_phone_display, host_phone_raw, arrival_instructions, arrival_steps
+  host_phone_display, host_phone_raw, arrival_instructions, arrival_steps, packing_items
 ) values (
   1,
   'Bieszczadzkie Ognisko w Wołkowyi',
@@ -53,6 +54,14 @@ insert into public.event_config (
     'Za przydrożną kapliczką skręć w lewo, w utwardzoną drogę szutrową w kierunku jeziora',
     'Jedź ok. 150 metrów — szukaj czarnej bramki po prawej stronie',
     'Gdy jesteś 10 minut przed celem — zadzwoń lub napisz, wyjdziemy na drogę'
+  ),
+  jsonb_build_array(
+    jsonb_build_object('title', 'Namiot', 'desc', 'Jeśli planujesz nocleg pod gwiazdami na działce.', 'icon', 'tent'),
+    jsonb_build_object('title', 'Śpiwór + Karimata', 'desc', 'Noce w Bieszczadach potrafią być chłodne nawet we wrześniu.', 'icon', 'moon'),
+    jsonb_build_object('title', 'Wygodne ciuchy do ogniska', 'desc', 'Bluza, długie spodnie. Ubrania, które mogą pachnieć dymem.', 'icon', 'shirt'),
+    jsonb_build_object('title', 'Latarka / Czołówka', 'desc', 'Na działce nie ma oświetlenia miejskiego. Będzie ciemno.', 'icon', 'flashlight'),
+    jsonb_build_object('title', 'Spray na komary', 'desc', 'Bliskość jeziora oznacza, że mogą być liczne.', 'icon', 'bug'),
+    jsonb_build_object('title', 'Woda i przekąski', 'desc', 'Sklepy są daleko, weź zapas na wieczór.', 'icon', 'droplets')
   )
 )
 on conflict (id) do nothing;
@@ -62,7 +71,6 @@ create table if not exists public.guests (
   id uuid default gen_random_uuid() primary key,
   name text not null,
   status text not null,
-  plus_count integer default 0,
   is_drinking boolean default true,
   alcohol_type text,
   bringing text,
@@ -77,23 +85,6 @@ create policy "Public can insert guests" on public.guests for insert with check 
 create policy "Public can update guests" on public.guests for update using (true) with check (true);
 
 alter publication supabase_realtime add table public.guests;
-
--- 3. Tabela Ekwipunku (Checklista)
-create table if not exists public.checklist (
-  id uuid default gen_random_uuid() primary key,
-  item_name text not null,
-  claimed_by text,
-  completed boolean default false,
-  created_at timestamp with time zone default timezone('utc'::text, now()) not null
-);
-
-alter table public.checklist enable row level security;
-
-create policy "Public can read checklist" on public.checklist for select using (true);
-create policy "Public can insert checklist" on public.checklist for insert with check (true);
-create policy "Public can update checklist" on public.checklist for update using (true) with check (true);
-
-alter publication supabase_realtime add table public.checklist;
 ```
 
 ---
