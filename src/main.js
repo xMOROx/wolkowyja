@@ -6,7 +6,6 @@ import { initCountdown } from './components/countdown/countdownModule.js';
 import { initMap } from './components/map/mapModule.js';
 import { initArrival } from './components/arrival/arrivalModule.js';
 import { initRSVP } from './components/rsvp/rsvpModule.js';
-import { initChecklist } from './components/checklist/checklistModule.js';
 import { initEmberField } from './components/ui/emberField.js';
 import { initScrollReveal } from './components/ui/scrollReveal.js';
 
@@ -22,7 +21,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   initMap();
   initArrival();
   initRSVP();
-  initChecklist();
 
   initScrollReveal();
 });

@@ -71,6 +71,30 @@ p:last-child {
   }
 }
 
+@media (max-width: 600px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .glass-panel {
+    padding: var(--space-lg) var(--space-md) var(--space-md);
+    border-radius: var(--radius-md);
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+  }
+
+  .section-header h2 {
+    font-size: 1.35rem;
+  }
+}
+
 /* Section headers — left-aligned by default */
 .section-header {
   text-align: left;

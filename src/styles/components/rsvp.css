@@ -111,3 +111,21 @@
   0%, 100% { opacity: 0.4; }
   50% { opacity: 0.8; }
 }
+
+@media (max-width: 600px) {
+  .guest-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .guest-filters {
+    flex-wrap: wrap;
+  }
+
+  .guest-item {
+    padding: var(--space-sm) var(--space-md);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+}

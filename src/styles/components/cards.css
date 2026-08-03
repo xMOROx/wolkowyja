@@ -179,3 +179,34 @@
     display: none !important;
   }
 }
+
+@media (max-width: 600px) {
+  .quick-info {
+    margin-top: -24px;
+  }
+
+  .info-card__icon {
+    width: 44px;
+    height: 44px;
+    margin: var(--space-md) var(--space-md) 0;
+  }
+
+  .info-card__body {
+    padding: var(--space-sm) var(--space-md) 0;
+  }
+
+  .info-card__value {
+    font-size: 1.15rem;
+  }
+
+  .info-card__footer {
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .info-card__hint {
+    text-align: left;
+  }
+}

@@ -44,7 +44,6 @@ async function handleFormSubmit(e) {
 
   const nameInput = document.getElementById('guest-name');
   const statusSelect = document.getElementById('guest-status');
-  const plusInput = document.getElementById('guest-plus');
   const drinkingSelect = document.getElementById('guest-drinking');
   const alcoholInput = document.getElementById('guest-alcohol');
   const bringingInput = document.getElementById('guest-bringing');
@@ -58,7 +57,6 @@ async function handleFormSubmit(e) {
   const newGuest = {
     name,
     status: statusSelect.value,
-    plusCount: parseInt(plusInput.value, 10) || 0,
     isDrinking,
     alcoholType,
     bringing: bringingInput.value.trim() || 'Dobre chęci'
@@ -90,13 +88,11 @@ export function renderGuestList() {
   const yesGuests = guests.filter(g => g.status === 'yes');
   const maybeGuests = guests.filter(g => g.status === 'maybe');
 
-  const totalHeadcount = yesGuests.reduce((acc, g) => acc + 1 + (g.plusCount || 0), 0);
-
-  if (confirmedCountEl) confirmedCountEl.textContent = totalHeadcount.toString();
+  if (confirmedCountEl) confirmedCountEl.textContent = yesGuests.length.toString();
   if (statYesEl) statYesEl.textContent = yesGuests.length.toString();
   if (statMaybeEl) statMaybeEl.textContent = maybeGuests.length.toString();
 
-  // Render Paska Statystyk Alkoholu (REQ-14)
+  // Alcohol stats bar
   if (statsBarContainer) {
     if (yesGuests.length > 0) {
       const drinkingCount = yesGuests.filter(g => g.isDrinking).length;
@@ -120,7 +116,7 @@ export function renderGuestList() {
     }
   }
 
-  // Filtrowanie
+  // Filtering
   let filtered = guests;
   if (activeFilter === 'yes') filtered = guests.filter(g => g.status === 'yes');
   else if (activeFilter === 'maybe') filtered = guests.filter(g => g.status === 'maybe');
@@ -140,27 +136,26 @@ export function renderGuestList() {
     else if (g.status === 'maybe') statusBadge = `<span class="stat-tag tag-maybe"><i data-lucide="help-circle" style="width:12px;"></i> Może</span>`;
     else statusBadge = `<span class="stat-tag"><i data-lucide="x" style="width:12px;"></i> Nie będzie</span>`;
 
-    const plusText = g.plusCount > 0 ? ` (+${g.plusCount} os.)` : '';
     const initial = g.name.trim().charAt(0).toUpperCase();
     const avatarBg = nameToColor(g.name);
 
-    const alcoholBadge = g.isDrinking 
-      ? `<span class="tag-alcohol">${escapeHtml(g.alcoholType)}</span>` 
+    const alcoholBadge = g.isDrinking
+      ? `<span class="tag-alcohol">${escapeHtml(g.alcoholType)}</span>`
       : `<span class="stat-tag">Bezalkoholowe</span>`;
 
     return `
       <div class="guest-item">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <div class="guest-avatar" style="background:${avatarBg}; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#0B1220; flex-shrink:0;">${initial}</div>
-          <div class="guest-info">
-            <strong style="font-size: 0.95rem; color: #FFF;">${escapeHtml(g.name)}${plusText}</strong>
+        <div style="display:flex; align-items:center; gap:12px; min-width:0;">
+          <div class="guest-avatar" style="background:${avatarBg}; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#0B1220; flex-shrink:0; font-size:0.85rem;">${initial}</div>
+          <div class="guest-info" style="min-width:0;">
+            <strong style="font-size: 0.95rem; color: #FFF; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(g.name)}</strong>
             <div style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 2px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
               ${alcoholBadge}
               <span>Przynosi: <i>${escapeHtml(g.bringing)}</i></span>
             </div>
           </div>
         </div>
-        <div>${statusBadge}</div>
+        <div style="flex-shrink:0;">${statusBadge}</div>
       </div>
     `;
   }).join('');

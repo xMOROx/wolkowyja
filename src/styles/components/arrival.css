@@ -46,3 +46,18 @@
   gap: var(--space-md);
   flex-wrap: wrap;
 }
+
+@media (max-width: 600px) {
+  .arrival-actions {
+    flex-direction: column;
+  }
+
+  .arrival-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .arrival-step-text {
+    font-size: 0.875rem;
+  }
+}

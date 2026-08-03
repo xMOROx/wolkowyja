@@ -110,7 +110,7 @@
           <div class="info-card__icon-glow"></div>
         </div>
         <div class="info-card__body">
-          <span class="info-card__label">Termin Zgłoszeń (RSVP)</span>
+          <span class="info-card__label">Potwierdź swoją obecność do</span>
           <h3 class="info-card__value" id="info-rsvp-deadline">6 Września 2026</h3>
           <span class="info-card__sub">Niedziela</span>
         </div>
@@ -140,7 +140,6 @@
     </div>
   </section>
 
-
   <!-- ARRIVAL & DIRECTIONS MODULE -->
   <section class="section arrival-section reveal" id="arrival-section">
     <div class="container">
@@ -148,7 +147,7 @@
         <div class="section-header">
           <div class="badge"><i data-lucide="compass"></i> Dojazd na Działkę</div>
           <h2>Jesteś 10 Minut przed Przyjazdem?</h2>
-          <p>Zapoznaj się z sekwencją kroków dojazdowych lub skontaktuj się z nami bezpośrednio przed skrętem.</p>
+          <p>Poniżej masz wskazówki co zrobić, by na pewno trafić na dobrą zabawę!</p>
         </div>
 
         <ol id="arrival-steps-list" class="arrival-steps"></ol>
@@ -194,6 +193,7 @@
     </div>
   </section>
 
+  <!-- RSVP FORM & GUEST LIST -->
   <section class="section rsvp-section reveal" id="rsvp-section">
     <div class="container">
       <div class="section-header">
@@ -221,11 +221,6 @@
                 <option value="maybe">Niezdecydowany / Może</option>
                 <option value="no">Brak możliwości przybycia</option>
               </select>
-            </div>
-
-            <div class="form-group">
-              <label for="guest-plus">Liczba osób towarzyszących (+X)</label>
-              <input type="number" id="guest-plus" min="0" max="8" value="0" class="form-input">
             </div>
 
             <div class="form-group">
@@ -279,33 +274,64 @@
     </div>
   </section>
 
-  <!-- EQUIPMENT CHECKLIST -->
-  <section class="section checklist-section reveal">
+  <!-- CO WARTO ZABRAĆ -->
+  <section class="section packing-section reveal">
     <div class="container">
       <div class="glass-panel">
         <div class="section-header">
-          <div class="badge"><i data-lucide="shopping-bag"></i> Wspólny Ekwipunek</div>
-          <h2>Lista Rzeczy do Przyniesienia</h2>
-          <p>Zadeklaruj produkty, które przyniesiesz na ognisko, aby uniknąć dublowania zapasów.</p>
+          <div class="badge"><i data-lucide="backpack"></i> Przygotuj się</div>
+          <h2>Co Warto Zabrać ze Sobą</h2>
+          <p>Kilka podpowiedzi, co się może przydać na nocnym ognisku w Bieszczadach.</p>
         </div>
 
-        <div class="progress-bar-container">
-          <div class="progress-label">
-            <span>Postęp skompletowania ekwipunku</span>
-            <strong id="checklist-progress-text">0%</strong>
+        <div class="packing-grid">
+          <div class="packing-item">
+            <div class="packing-item__icon"><i data-lucide="tent"></i></div>
+            <div class="packing-item__body">
+              <strong>Namiot</strong>
+              <span>Jeśli planujesz nocleg pod gwiazdami na działce.</span>
+            </div>
           </div>
-          <div class="progress-track">
-            <div class="progress-fill" id="checklist-progress-fill"></div>
+
+          <div class="packing-item">
+            <div class="packing-item__icon"><i data-lucide="moon"></i></div>
+            <div class="packing-item__body">
+              <strong>Śpiwór + Karimata</strong>
+              <span>Noce w Bieszczadach potrafią być chłodne nawet we wrześniu.</span>
+            </div>
           </div>
-        </div>
 
-        <div id="checklist-container" class="checklist-items">
-          <!-- Dynamic checklist -->
-        </div>
+          <div class="packing-item">
+            <div class="packing-item__icon"><i data-lucide="shirt"></i></div>
+            <div class="packing-item__body">
+              <strong>Wygodne ciuchy do ogniska</strong>
+              <span>Bluza, długie spodnie. Ubrania, które mogą pachnieć dymem.</span>
+            </div>
+          </div>
 
-        <div class="add-item-box">
-          <input type="text" id="new-item-input" placeholder="Dodaj nową pozycję na listę..." class="form-input">
-          <button id="btn-add-item" class="btn btn-secondary"><i data-lucide="plus"></i> Dodaj</button>
+          <div class="packing-item">
+            <div class="packing-item__icon"><i data-lucide="flashlight"></i></div>
+            <div class="packing-item__body">
+              <strong>Latarka / Czołówka</strong>
+              <span>Na działce nie ma oświetlenia miejskiego. Będzie ciemno.</span>
+            </div>
+          </div>
+
+          <div class="packing-item">
+            <div class="packing-item__icon"><i data-lucide="bug"></i></div>
+            <div class="packing-item__body">
+              <strong>Spray na komary</strong>
+              <span>Bliskość jeziora oznacza, że mogą być liczne.</span>
+            </div>
+          </div>
+
+          <div class="packing-item">
+            <div class="packing-item__icon"><i data-lucide="droplets"></i></div>
+            <div class="packing-item__body">
+              <strong>Woda i przekąski</strong>
+              <span>Sklepy są daleko, weź zapas na wieczór.</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -41,6 +41,12 @@
   z-index: 1;
 }
 
+@media (max-width: 600px) {
+  .map-wrapper {
+    height: 280px;
+  }
+}
+
 .custom-map-pin {
   position: relative;
 }
